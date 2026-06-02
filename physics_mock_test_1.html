@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Exam 1 — JENPAS UG Physics Mock Test</title>
+    <meta name="description" content="JENPAS UG Physics Mock Test - Test Exam 1 with Negative Marking & Live Leaderboard">
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']] },
+            chtml: { fontURL: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2' },
+            startup: { typeset: true }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== THEME VARIABLES ===== */
+        :root, [data-theme="dark"] {
+            --bg-primary: #0b0f19;
+            --bg-secondary: #111827;
+            --bg-card: #141b2d;
+            --bg-card-hover: #1a2440;
+            --bg-option: #1a2240;
+            --bg-option-hover: #1f2d52;
+            --bg-option-selected: #1c3a6e;
+            --border-default: #2a3352;
+            --border-selected: #60a5fa;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-amber: #f59e0b;
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.5);
+            --shadow-card: 0 4px 24px rgba(0,0,0,0.3);
+            --shadow-glow: 0 0 30px rgba(59,130,246,0.12);
+            --topbar-bg: rgba(11,15,25,0.92);
+            --modal-bg: rgba(0,0,0,0.75);
+            --print-bg: #0b0f19;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f0f4f8;
+            --bg-secondary: #e8ecf1;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f8f9fb;
+            --bg-option: #f3f5f9;
+            --bg-option-hover: #e8ecf4;
+            --bg-option-selected: #dbeafe;
+            --border-default: #d1d9e6;
+            --border-selected: #3b82f6;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a5568;
+            --text-muted: #718096;
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.08);
+            --shadow-card: 0 2px 12px rgba(0,0,0,0.06);
+            --shadow-glow: 0 0 20px rgba(59,130,246,0.08);
+            --topbar-bg: rgba(240,244,248,0.92);
+            --modal-bg: rgba(0,0,0,0.4);
+            --print-bg: #ffffff;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+            transition: background-color 0.4s, color 0.4s;
+        }
+
+        ::-webkit-scrollbar { width: 7px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-blue); }
+
+        /* ===== THEME TOGGLE ===== */
+        .theme-toggle {
+            position: fixed; bottom: 24px; right: 24px; z-index: 999;
+            width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--border-default);
+            background: var(--bg-card); color: var(--text-primary);
+            font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            box-shadow: var(--shadow-card); transition: all 0.3s;
+        }
+        .theme-toggle:hover { transform: scale(1.1); border-color: var(--accent-blue); box-shadow: 0 0 20px rgba(59,130,246,0.3); }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
+        @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+        .fade-up { animation: fadeUp 0.6s ease-out; }
+
+        /* ===== GRADIENT ===== */
+        .gradient-text { background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .gradient-bg { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%); }
+        .gradient-border { border-image: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899) 1; }
+
+        /* ===== REGISTRATION ===== */
+        #reg-screen {
+            display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px;
+            position: relative; overflow: hidden;
+        }
+        #reg-screen::before, #reg-screen::after {
+            content:''; position:absolute; width:500px; height:500px; border-radius:50%; pointer-events:none;
+        }
+        #reg-screen::before { top:-200px; right:-150px; background: radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 70%); }
+        #reg-screen::after { bottom:-200px; left:-150px; background: radial-gradient(circle, rgba(139,92,246,0.07) 0%, transparent 70%); }
+
+        .reg-card {
+            background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 24px;
+            padding: 44px; max-width: 520px; width: 100%; box-shadow: var(--shadow-lg);
+            position: relative; z-index: 1; animation: fadeUp 0.6s ease-out;
+            transition: background-color 0.4s, border-color 0.4s;
+        }
+        .reg-logo { text-align: center; margin-bottom: 28px; }
+        .reg-logo .icon { width: 68px; height: 68px; border-radius: 18px; display: inline-flex; align-items: center; justify-content: center; font-size: 30px; margin-bottom: 14px; box-shadow: 0 8px 28px rgba(59,130,246,0.3); }
+        .reg-logo h1 { font-family: 'Inter', sans-serif; font-size: 26px; font-weight: 800; }
+        .reg-logo .sub { color: var(--text-secondary); font-size: 13px; margin-top: 4px; }
+
+        .exam-pills { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 18px 0 24px; }
+        .pill { background: var(--bg-option); border: 1px solid var(--border-default); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: var(--text-secondary); font-weight: 500; transition: all 0.3s; }
+        .pill strong { color: var(--accent-cyan); }
+        .pill.neg { border-color: rgba(239,68,68,0.3); }
+        .pill.neg strong { color: var(--accent-red); }
+
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 7px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-group input {
+            width: 100%; padding: 13px 16px; background: var(--bg-option); border: 1px solid var(--border-default);
+            border-radius: 12px; color: var(--text-primary); font-size: 16px; font-family: inherit;
+            transition: all 0.3s; outline: none;
+        }
+        .form-group input:focus { border-color: var(--accent-blue); box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
+        .form-group input::placeholder { color: var(--text-muted); }
+
+        .btn-primary {
+            width: 100%; padding: 15px; border: none; border-radius: 12px; color: white;
+            font-size: 16px; font-weight: 700; font-family: inherit; cursor: pointer;
+            transition: all 0.3s; letter-spacing: 0.3px;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(59,130,246,0.35); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .lock-box { text-align: center; padding: 22px; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.2); border-radius: 12px; margin-top: 14px; transition: all 0.3s; }
+        .lock-box .lock-icon { font-size: 42px; margin-bottom: 10px; }
+        .lock-box h3 { color: var(--accent-red); font-size: 17px; margin-bottom: 5px; }
+        .lock-box p { color: var(--text-secondary); font-size: 13px; }
+
+        /* ===== EXAM SCREEN ===== */
+        #exam-screen { display: none; }
+
+        .top-bar {
+            position: sticky; top: 0; z-index: 100;
+            background: var(--topbar-bg); backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-default); padding: 10px 20px;
+            transition: background-color 0.4s;
+        }
+        .top-inner { max-width: 880px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+        .stu-info { display: flex; align-items: center; gap: 10px; }
+        .stu-avatar { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; color: white; }
+        .stu-name { font-weight: 600; font-size: 14px; }
+
+        .timer-box { display: flex; align-items: center; gap: 7px; background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 12px; padding: 7px 14px; transition: all 0.3s; }
+        .timer-display { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; color: var(--accent-cyan); min-width: 75px; text-align: center; }
+        .timer-box.warn .timer-display { color: var(--accent-amber); }
+        .timer-box.danger .timer-display { color: var(--accent-red); animation: pulse 1s infinite; }
+
+        .progress-strip { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+        .progress-info { display: flex; justify-content: space-between; margin: 14px 0 6px; font-size: 12px; color: var(--text-secondary); }
+        .progress-bg { width: 100%; height: 5px; background: var(--bg-option); border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; width: 0%; }
+
+        /* Questions */
+        .q-container { max-width: 880px; margin: 0 auto; padding: 20px; }
+        .sec-header { text-align: center; margin: 32px 0 20px; position: relative; }
+        .sec-header::before { content:''; position:absolute; top:50%; left:0; right:0; height:1px; background: linear-gradient(to right, transparent, var(--border-default), transparent); }
+        .sec-header h2 { display: inline-block; background: var(--bg-primary); padding: 0 20px; position: relative; font-size: 17px; font-weight: 700; transition: background-color 0.4s; }
+        .sec-badge { display: inline-block; background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 18px; padding: 3px 14px; font-size: 10px; color: var(--accent-cyan); margin-top: 6px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+
+        .q-block {
+            background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 14px;
+            padding: 22px; margin-bottom: 16px; transition: all 0.3s;
+        }
+        .q-block:hover { border-color: rgba(59,130,246,0.25); box-shadow: var(--shadow-glow); }
+        .q-block.answered { border-color: rgba(16,185,129,0.3); }
+
+        .q-stem { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+        .q-num { flex-shrink: 0; width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Inter'; font-weight: 800; font-size: 14px; color: white; }
+        .q-text { flex: 1; font-size: 15px; font-weight: 500; line-height: 1.8; padding-top: 5px; }
+
+        .opts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-left: 48px; }
+        .opts-grid.single-col { grid-template-columns: 1fr; }
+
+        .opt-label {
+            display: flex; align-items: flex-start; gap: 10px; padding: 11px 14px;
+            background: var(--bg-option); border: 1.5px solid var(--border-default); border-radius: 10px;
+            cursor: pointer; transition: all 0.25s; position: relative; overflow: hidden;
+        }
+        .opt-label:hover { background: var(--bg-option-hover); border-color: rgba(59,130,246,0.35); }
+        .opt-label.selected { background: var(--bg-option-selected); border-color: var(--border-selected); box-shadow: 0 0 16px rgba(59,130,246,0.08); }
+        .opt-label.selected::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background: var(--accent-blue); }
+        .opt-label input[type="radio"] { display: none; }
+
+        .radio-dot { flex-shrink: 0; width: 18px; height: 18px; border: 2px solid var(--border-default); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.25s; margin-top: 2px; }
+        .opt-label.selected .radio-dot { border-color: var(--accent-blue); background: var(--accent-blue); }
+        .opt-label.selected .radio-dot::after { content:''; width: 7px; height: 7px; background: white; border-radius: 50%; }
+
+        .opt-letter { font-family: 'Inter'; font-weight: 700; font-size: 12px; color: var(--text-muted); min-width: 18px; margin-top: 1px; }
+        .opt-label.selected .opt-letter { color: var(--accent-blue); }
+        .opt-content { flex: 1; font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+        .opt-label.selected .opt-content { color: var(--text-primary); }
+
+        .submit-area { text-align: center; margin: 36px 0 50px; padding: 28px; background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 20px; transition: all 0.3s; }
+        .submit-area p { color: var(--text-secondary); margin-bottom: 18px; font-size: 13px; }
+        .btn-submit { padding: 14px 44px; border: none; border-radius: 12px; color: white; font-size: 17px; font-weight: 700; font-family: inherit; cursor: pointer; transition: all 0.3s; }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(59,130,246,0.35); }
+
+        /* ===== RESULT SCREEN ===== */
+        #result-screen { display: none; }
+        .result-box { max-width: 880px; margin: 0 auto; padding: 20px; }
+
+        .result-hero { text-align: center; padding: 40px 28px; background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 20px; margin-bottom: 28px; position: relative; overflow: hidden; transition: all 0.3s; }
+        .result-hero::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; }
+        .score-circle { width: 150px; height: 150px; border-radius: 50%; border: 5px solid var(--border-default); display: inline-flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 20px; transition: border-color 0.3s; }
+        .score-big { font-family: 'Inter'; font-size: 44px; font-weight: 900; line-height: 1; }
+        .score-of { font-size: 13px; color: var(--text-muted); font-weight: 600; }
+        .result-hero h2 { font-size: 24px; font-weight: 800; margin-bottom: 6px; }
+        .result-hero .detail { color: var(--text-secondary); font-size: 13px; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 28px; }
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 14px; padding: 18px 10px; text-align: center; transition: all 0.3s; }
+        .stat-card .s-icon { font-size: 24px; margin-bottom: 6px; }
+        .stat-card .s-val { font-family: 'Inter'; font-size: 28px; font-weight: 800; margin-bottom: 3px; }
+        .stat-card .s-lbl { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; font-weight: 600; }
+        .stat-card.correct .s-val { color: var(--accent-green); }
+        .stat-card.wrong .s-val { color: var(--accent-red); }
+        .stat-card.skipped .s-val { color: var(--accent-amber); }
+        .stat-card.score .s-val { color: var(--accent-cyan); }
+        .stat-card.pct .s-val { color: var(--accent-purple); }
+
+        .neg-info { text-align: center; padding: 12px 20px; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15); border-radius: 10px; margin-bottom: 28px; font-size: 13px; color: var(--accent-red); }
+
+        /* Leaderboard */
+        .lb-section { background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 16px; padding: 22px; margin-bottom: 28px; transition: all 0.3s; }
+        .lb-section h3 { text-align: center; margin-bottom: 18px; font-size: 18px; }
+        .lb-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .lb-table th, .lb-table td { padding: 12px 10px; border-bottom: 1px solid var(--border-default); text-align: left; }
+        .lb-table th { color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+        .lb-table tr { transition: background 0.2s; }
+        .lb-table tbody tr:hover { background: var(--bg-option); }
+        .rank-1 { color: #f59e0b; font-weight: 800; }
+        .rank-2 { color: #94a3b8; font-weight: 700; }
+        .rank-3 { color: #b45309; font-weight: 700; }
+        .lb-table .highlight-row { background: rgba(59,130,246,0.06); }
+
+        /* PDF Button */
+        .pdf-btn-area { text-align: center; margin-bottom: 28px; }
+        .btn-pdf { display: inline-flex; align-items: center; gap: 8px; padding: 13px 32px; border: 2px solid var(--accent-purple); border-radius: 12px; background: rgba(139,92,246,0.08); color: var(--accent-purple); font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; transition: all 0.3s; }
+        .btn-pdf:hover { background: var(--accent-purple); color: white; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(139,92,246,0.3); }
+
+        /* Answer Review */
+        .review-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
+        .review-header h3 { font-size: 18px; font-weight: 700; }
+        .filter-btns { display: flex; gap: 7px; flex-wrap: wrap; }
+        .filter-btn { padding: 5px 12px; background: var(--bg-option); border: 1px solid var(--border-default); border-radius: 18px; color: var(--text-secondary); font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+        .filter-btn:hover, .filter-btn.active { border-color: var(--accent-blue); color: var(--accent-blue); background: rgba(59,130,246,0.06); }
+
+        .rev-block { background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 14px; padding: 18px 20px; margin-bottom: 12px; transition: all 0.3s; }
+        .rev-block.is-correct { border-left: 4px solid var(--accent-green); }
+        .rev-block.is-wrong { border-left: 4px solid var(--accent-red); }
+        .rev-block.is-skipped { border-left: 4px solid var(--accent-amber); }
+        .rev-stem { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+        .rev-num { flex-shrink: 0; width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; color: white; }
+        .rev-block.is-correct .rev-num { background: var(--accent-green); }
+        .rev-block.is-wrong .rev-num { background: var(--accent-red); }
+        .rev-block.is-skipped .rev-num { background: var(--accent-amber); }
+        .rev-q-text { flex: 1; font-size: 13px; line-height: 1.7; padding-top: 3px; }
+        .rev-tags { margin-left: 40px; display: flex; flex-wrap: wrap; gap: 7px; font-size: 12px; }
+        .rev-tag { padding: 3px 10px; border-radius: 6px; font-weight: 600; }
+        .rev-tag.correct-tag { background: rgba(16,185,129,0.1); color: var(--accent-green); border: 1px solid rgba(16,185,129,0.25); }
+        .rev-tag.wrong-tag { background: rgba(239,68,68,0.1); color: var(--accent-red); border: 1px solid rgba(239,68,68,0.25); }
+        .rev-tag.right-tag { background: rgba(16,185,129,0.1); color: var(--accent-green); border: 1px solid rgba(16,185,129,0.25); }
+        .rev-tag.skip-tag { background: rgba(245,158,11,0.1); color: var(--accent-amber); border: 1px solid rgba(245,158,11,0.25); }
+
+        .result-footer { text-align: center; padding: 28px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border-default); margin-top: 36px; }
+
+        /* Modal */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--modal-bg); backdrop-filter: blur(8px); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-overlay.show { display: flex; }
+        .modal-box { background: var(--bg-card); border: 1px solid var(--border-default); border-radius: 20px; padding: 32px; max-width: 420px; width: 90%; text-align: center; box-shadow: var(--shadow-lg); animation: fadeUp 0.3s ease-out; }
+        .modal-box .m-icon { font-size: 44px; margin-bottom: 14px; }
+
+        .modal-box h3 { font-size: 19px; font-weight: 700; margin-bottom: 7px; }
+        .modal-box p { color: var(--text-secondary); font-size: 13px; margin-bottom: 20px; line-height: 1.6; }
+        .modal-btns { display: flex; gap: 10px; justify-content: center; }
+        .m-btn { padding: 11px 24px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; border: none; }
+        .m-btn.cancel { background: var(--bg-option); border: 1px solid var(--border-default); color: var(--text-secondary); }
+        .m-btn.cancel:hover { background: var(--bg-option-hover); }
+        .m-btn.ok { color: white; }
+        .m-btn.ok:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(59,130,246,0.35); }
+        .unanswered-warn { color: var(--accent-amber); font-size: 12px; margin-bottom: 14px; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .reg-card { padding: 28px 20px; }
+            .opts-grid { grid-template-columns: 1fr; margin-left: 0; }
+            .stats-grid { grid-template-columns: repeat(3, 1fr); }
+            .top-inner { flex-direction: column; gap: 6px; }
+            .filter-btns { flex-wrap: wrap; }
+            .review-header { flex-direction: column; align-items: flex-start; }
+            .q-stem { flex-direction: column; gap: 6px; }
+            .q-num { width: 30px; height: 30px; font-size: 12px; border-radius: 8px; }
+            .lb-table { font-size: 11px; }
+            .lb-table th, .lb-table td { padding: 8px 5px; }
+        }
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    /* ===== TABS ===== */
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.tab-btn {
+    padding: 10px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-default);
+    color: var(--text-secondary);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+.tab-btn:hover {
+    background: var(--bg-card-hover);
+}
+.tab-btn.active {
+    background: var(--bg-option-selected);
+    color: var(--text-primary);
+    border-color: var(--border-selected);
+}
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}/* ===== LOCK SCREEN PODIUM AND SOUNDS ===== */
+.lock-screen-box {
+    background: var(--bg-card);
+    border: 1px solid rgba(239, 68, 68, 0.15);
+    border-radius: 20px;
+    padding: 32px 24px;
+    text-align: center;
+    margin-bottom: 28px;
+    box-shadow: 0 8px 32px rgba(239, 68, 68, 0.04);
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.4s ease-out;
+    transition: background-color 0.4s, border-color 0.4s;
+}
+.lock-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.lock-logo-wrapper {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(239, 68, 68, 0.08);
+    border: 2px dashed rgba(239, 68, 68, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.12);
+    transition: all 0.3s ease;
+}
+.lock-logo-wrapper:hover {
+    transform: rotate(5deg) scale(1.05);
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.5);
+    box-shadow: 0 0 40px rgba(239, 68, 68, 0.2);
+}
+.lock-logo-big {
+    font-size: 48px;
+    display: inline-block;
+    animation: lockPulse 2s infinite ease-in-out;
+}
+@keyframes lockPulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(239,68,68,0.2)); }
+    50% { transform: scale(1.12); filter: drop-shadow(0 0 16px rgba(239,68,68,0.5)); }
+}
+.lock-screen-box h2 {
+    color: var(--accent-red);
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+.lock-screen-box p.lock-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+.podium-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--accent-cyan);
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+.podium-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    min-height: 150px;
+}
+.podium-card {
+    background: var(--bg-option);
+    border: 1px solid var(--border-default);
+    border-radius: 14px;
+    padding: 14px 10px;
+    width: 30%;
+    max-width: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.podium-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    border-color: var(--border-selected);
+}
+.podium-card.gold {
+    height: 145px;
+    border-color: rgba(245,158,11,0.35);
+    background: linear-gradient(180deg, rgba(245,158,11,0.08) 0%, var(--bg-option) 100%);
+    box-shadow: 0 4px 16px rgba(245,158,11,0.1);
+    z-index: 2;
+}
+.podium-card.gold:hover {
+    box-shadow: 0 8px 24px rgba(245,158,11,0.2);
+}
+.podium-card.gold::before {
+    content: '👑';
+    position: absolute;
+    top: 2px;
+    font-size: 14px;
+    filter: drop-shadow(0 2px 4px rgba(245,158,11,0.4));
+    animation: bounceCrown 2s infinite ease-in-out;
+    z-index: 10;
+}
+@keyframes bounceCrown {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-3px) scale(1.1); }
+}
+.podium-card.silver {
+    height: 120px;
+    border-color: rgba(148,163,184,0.35);
+    background: linear-gradient(180deg, rgba(148,163,184,0.06) 0%, var(--bg-option) 100%);
+}
+.podium-card.silver:hover {
+    box-shadow: 0 8px 24px rgba(148,163,184,0.15);
+}
+.podium-card.bronze {
+    height: 110px;
+    border-color: rgba(180,83,9,0.35);
+    background: linear-gradient(180deg, rgba(180,83,9,0.06) 0%, var(--bg-option) 100%);
+}
+.podium-card.bronze:hover {
+    box-shadow: 0 8px 24px rgba(180,83,9,0.15);
+}
+.podium-badge {
+    font-size: 22px;
+    margin-bottom: 4px;
+}
+.podium-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    margin-bottom: 6px;
+}
+.podium-score {
+    font-family: 'Inter';
+    font-size: 14px;
+    font-weight: 900;
+}
+.podium-card.gold .podium-score { color: #f59e0b; }
+.podium-card.silver .podium-score { color: #94a3b8; }
+.podium-card.bronze .podium-score { color: #b45309; }
+ 
+.podium-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+}
+ 
+@media (max-width: 480px) {
+    .podium-wrapper { gap: 8px; }
+    .podium-card { padding: 10px 6px; }
+    .podium-name { font-size: 11px; }
+    .podium-score { font-size: 13px; }
+    .lock-logo-big { font-size: 40px; }
+    .lock-logo-wrapper { width: 80px; height: 80px; }
+    .lock-screen-box h2 { font-size: 19px; }
+}
+</style>e>
+</head>
+<body data-theme="dark">
+<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="থিম পরিবর্তন">🌙</button>
+
+<!-- ==================== REGISTRATION ==================== -->
+<div id="reg-screen">
+    <div class="reg-card">
+        <div class="reg-logo">
+            <div class="icon gradient-bg">📝</div>
+            <h1 class="gradient-text">JENPAS (UG)</h1>
+            <p class="sub">Physics Mock Test — Test Exam 1</p>
+        </div>
+        <div class="exam-pills">
+            <span class="pill"><strong>55</strong> প্রশ্ন</span>
+            <span class="pill"><strong>90</strong> মিনিট</span>
+            <span class="pill"><strong>55</strong> নম্বর</span>
+            <span class="pill neg">⚠️ <strong>-0.25</strong> নেগেটিভ</span>
+        </div>
+        <div id="reg-form">
+            <div class="form-group">
+                <label for="studentName">পরীক্ষার্থীর নাম</label>
+                <input type="text" id="studentName" placeholder="আপনার পুরো নাম লিখুন" autocomplete="name">
+            </div>
+            <button class="btn-primary gradient-bg" id="btnStart" onclick="startExam()">পরীক্ষা শুরু করুন →</button>
+        </div>
+        <div id="locked-msg" style="display:none;"></div>
+    </div>
+</div>
+
+<!-- ==================== EXAM ==================== -->
+<div id="exam-screen">
+    <div class="top-bar">
+        <div class="top-inner">
+            <div class="stu-info">
+                <div class="stu-avatar gradient-bg" id="avatar"></div>
+                <div class="stu-name" id="displayName"></div>
+            </div>
+            <div class="timer-box" id="timerBox">
+                <span>⏱️</span>
+                <span class="timer-display" id="timerDisplay">90:00</span>
+            </div>
+        </div>
+    </div>
+    <div class="progress-strip">
+        <div class="progress-info">
+            <span id="answeredCount">উত্তর: 0 / 55</span>
+            <span id="progressPct">0%</span>
+        </div>
+        <div class="progress-bg"><div class="progress-fill gradient-bg" id="progressFill"></div></div>
+    </div>
+    <div class="q-container" id="qContainer"></div>
+    <div class="q-container">
+        <div class="submit-area">
+            <p>⚠️ নেগেটিভ মার্কিং: প্রতি ৪টি ভুল উত্তরে ১ নম্বর কাটা হবে। সমস্ত প্রশ্নের উত্তর দিয়ে নীচের বোতাম চাপুন।</p>
+            <button class="btn-submit gradient-bg" onclick="showModal()">📋 পরীক্ষা জমা দিন</button>
+        </div>
+    </div>
+</div>
+
+<!-- ==================== RESULT ==================== -->
+<div id="result-screen">
+    <div class="result-box" id="resultBox"></div>
+</div>
+
+<!-- ==================== MODAL ==================== -->
+<div class="modal-overlay" id="confirmModal">
+    <div class="modal-box">
+        <div class="m-icon">⚠️</div>
+        <h3>পরীক্ষা জমা দিতে চান?</h3>
+        <p>জমা দেওয়ার পর উত্তর পরিবর্তন করা যাবে না।</p>
+        <div id="unansweredWarn" class="unanswered-warn" style="display:none;"></div>
+        <div class="modal-btns">
+            <button class="m-btn cancel" onclick="hideModal()">বাতিল</button>
+            <button class="m-btn ok gradient-bg" onclick="submitExam()">✅ হ্যাঁ, জমা দিন</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+// ===== SOUND EFFECTS (Web Audio API Synthesizer) =====
+const SoundFX = {
+    ctx: null,
+    init() {
+        if (!this.ctx) {
+            this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+    },
+    playClick() {
+        try {
+            this.init();
+            if (this.ctx.state === 'suspended') this.ctx.resume();
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(750, this.ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(150, this.ctx.currentTime + 0.04);
+            
+            gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);
+            
+            osc.start();
+            osc.stop(this.ctx.currentTime + 0.04);
+        } catch (e) { console.warn("Audio error: ", e); }
+    },
+    playTick() {
+        try {
+            this.init();
+            if (this.ctx.state === 'suspended') this.ctx.resume();
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(900, this.ctx.currentTime);
+            gain.gain.setValueAtTime(0.015, this.ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.02);
+            
+            osc.start();
+            osc.stop(this.ctx.currentTime + 0.02);
+        } catch (e) { console.warn("Audio error: ", e); }
+    },
+    playSuccess() {
+        try {
+            this.init();
+            if (this.ctx.state === 'suspended') this.ctx.resume();
+            const t = this.ctx.currentTime;
+            const notes = [261.63, 329.63, 392.00, 523.25]; // C4, E4, G4, C5
+            notes.forEach((freq, idx) => {
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, t + idx * 0.08);
+                
+                gain.gain.setValueAtTime(0, t + idx * 0.08);
+                gain.gain.linearRampToValueAtTime(0.08, t + idx * 0.08 + 0.04);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + idx * 0.08 + 0.35);
+                
+                osc.start(t + idx * 0.08);
+                osc.stop(t + idx * 0.08 + 0.35);
+            });
+        } catch (e) { console.warn("Audio error: ", e); }
+    },
+    playLock() {
+        try {
+            this.init();
+            if (this.ctx.state === 'suspended') this.ctx.resume();
+            const t = this.ctx.currentTime;
+            
+            // Double bass thud
+            [0, 0.06].forEach(delay => {
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(140, t + delay);
+                osc.frequency.exponentialRampToValueAtTime(30, t + delay + 0.08);
+                
+                gain.gain.setValueAtTime(0.12, t + delay);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + delay + 0.08);
+                
+                osc.start(t + delay);
+                osc.stop(t + delay + 0.08);
+            });
+            
+            // Metallic high-frequency snap
+            const oscMetal = this.ctx.createOscillator();
+            const gainMetal = this.ctx.createGain();
+            oscMetal.connect(gainMetal);
+            gainMetal.connect(this.ctx.destination);
+            
+            oscMetal.type = 'triangle';
+            oscMetal.frequency.setValueAtTime(1000, t);
+            oscMetal.frequency.exponentialRampToValueAtTime(250, t + 0.04);
+            
+            gainMetal.gain.setValueAtTime(0.04, t);
+            gainMetal.gain.exponentialRampToValueAtTime(0.001, t + 0.04);
+            
+            oscMetal.start(t);
+            oscMetal.stop(t + 0.04);
+        } catch (e) { console.warn("Audio error: ", e); }
+    }
+};
+
+// ===== CONFIG =====
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbykEo38_wGY_pRb5xopDJln8sfbke761MvpZ1_RZsbFcPax34Fd8foFKkJT9No3hz6h1g/exec';
+const EXAM_KEY = 'jenpas_test_exam_1_final_v2';
+const OPT_LETTERS = ['(a)','(b)','(c)','(d)'];
+
+
+// ===== ANSWER KEY (0=a, 1=b, 2=c, 3=d) =====
+const ANSWER_KEY = [
+    0,0,1,1,0, 1,1,0,0,0,
+    1,0,0,2,0, 3,0,3,0,1,
+    2,3,3,0,0, 3,3,3,1,1,
+    1,1,2,1,3, 3,0,3,1,2,
+    1,2,0,3,0, 0,0,2,2,0,
+    0,3,1,0,0
+];
+
+// ===== DETAILED EXPLANATIONS =====
+const EXPLANATIONS = [
+"ভারবিহীন অসম্প্রসারণযোগ্য তারে টান সর্বত্র সমান থাকে। নিউটনের গতির তৃতীয় সূত্র অনুযায়ী, প্রত্যেক ক্রিয়ারই সমান ও বিপরীত প্রতিক্রিয়া আছে। যখন একটি ভারহীন দড়ির উভয় প্রান্তে 10 N বল প্রয়োগ করে টানা হয়, তখন দড়ির যেকোনো প্রস্থচ্ছেদে উভয় দিক থেকে সমান ও বিপরীতমুখী বল কাজ করে। দড়িটি সাম্যাবস্থায় থাকায় এর লব্ধি বল শূন্য হয়। দড়ির অভ্যন্তরে যে বল অংশগুলিকে একত্রে ধরে রাখে তাকে টান (Tension) বলে। এক্ষেত্রে, দড়ির যেকোনো বিন্দুতে টান 10 N-ই হবে। 20 N হবে না কারণ দুটি বল একে অপরের প্রতিক্রিয়া হিসেবে কাজ করে সাম্যাবস্থা সৃষ্টি করছে।",
+"আর্কিমিডিসের নীতি অনুযায়ী, কোনো বস্তুকে স্থির তরলে আংশিক বা সম্পূর্ণ নিমজ্জিত করলে বস্তুটি তার সমআয়তন তরল অপসারণ করে এবং অপসারিত তরলের ওজনের সমান উর্ধ্বঘাত (Buoyant force) অনুভব করে। ভাসমান বস্তুর ক্ষেত্রে, বস্তুর ওজন (\\(W\\)) খাড়া নিচের দিকে এবং তরল কর্তৃক প্রযুক্ত উর্ধ্বঘাত (\\(U\\)) খাড়া উপরের দিকে কাজ করে। বস্তুটি যেহেতু তরলে সাম্যাবস্থায় ভাসছে, তাই নিউটনের সূত্র অনুসারে লব্ধি বল শূন্য হতে হবে। অর্থাৎ, বস্তুর ওজন = উর্ধ্বঘাত (\\(W = U\\))। তাই ভাসমান কাঠের ব্লকের উপর উর্ধ্বঘাত তার ওজনের ঠিক সমান হবে।",
+"মেরু অঞ্চলের বরফ গলে গেলে সেই জল নিরক্ষীয় অঞ্চলের দিকে ছড়িয়ে পড়বে। এর ফলে পৃথিবীর ভরের বণ্টন ঘূর্ণন অক্ষ থেকে দূরে সরে যাবে। আমরা জানি, জড়তার ভ্রামক (Moment of Inertia, \\( I = \\sum mr^2 \\)) ঘূর্ণন অক্ষ থেকে ভরের দূরত্বের বর্গের সমানুপাতিক। ভর দূরে সরে যাওয়ায় পৃথিবীর জড়তার ভ্রামক (\\( I \\)) বৃদ্ধি পাবে।<br><br>কৌণিক ভরবেগের সংরক্ষণ সূত্র অনুযায়ী, বাহ্যিক টর্ক শূন্য হলে বস্তুর কৌণিক ভরবেগ (\\( L = I\\omega \\)) ধ্রুবক থাকে। সুতরাং, \\( I \\) বৃদ্ধি পেলে কৌণিক বেগ (\\( \\omega \\)) হ্রাস পাবে। দিনের দৈর্ঘ্য বা পর্যায়কাল, \\( T = \\frac{2\\pi}{\\omega} \\)। যেহেতু \\( \\omega \\) হ্রাস পাচ্ছে, তাই দিনের দৈর্ঘ্য \\( T \\) বৃদ্ধি পাবে।",
+"দুটি সুসঙ্গত উৎস থেকে নির্গত আলোক তরঙ্গের উপরিপাতনের ফলে গঠনমূলক ব্যতিচার (Constructive interference) সৃষ্টি হলে, উজ্জ্বল বিন্দু তৈরি হয়। এক্ষেত্রে দুটি তরঙ্গের মধ্যে দশা পার্থক্য (Phase difference, \\( \\Delta\\phi \\)) হতে হবে \\( 2\\pi \\)-এর পূর্ণ গুণিতক, অর্থাৎ \\( \\Delta\\phi = 2n\\pi \\) (যেখানে \\( n = 0, 1, 2, \\dots \\))।<br><br>দশা পার্থক্য এবং পথ পার্থক্যের (Path difference, \\( \\Delta x \\)) মধ্যে সম্পর্ক হলো: \\( \\Delta\\phi = \\frac{2\\pi}{\\lambda} \\Delta x \\)। <br>সুতরাং, \\( \\frac{2\\pi}{\\lambda} \\Delta x = 2n\\pi \\implies \\Delta x = n\\lambda = 2n\\left(\\frac{\\lambda}{2}\\right) \\)।<br>অর্থাৎ, পথ পার্থক্য হতে হবে অর্ধ-তরঙ্গদৈর্ঘ্যের (\\( \\frac{\\lambda}{2} \\)) জোড় গুণিতক।",
+"তড়িৎফ্লাক্স (\\( \\Phi_E \\)) হলো কোনো তলের মধ্য দিয়ে অতিক্রান্ত মোট তড়িৎ বলরেখার সংখ্যা। এর সংজ্ঞা অনুযায়ী, \\( \\Phi_E = \\vec{E} \\cdot \\vec{A} \\), যেখানে \\( \\vec{E} \\) হলো তড়িৎক্ষেত্র প্রাবল্য এবং \\( \\vec{A} \\) হলো ক্ষেত্রফল ভেক্টর।<br><br>তড়িৎক্ষেত্রের একক: \\( \\frac{\\text{ভোল্ট}}{\\text{মিটার}} \\) (\\( \\frac{\\text{V}}{\\text{m}} \\))<br>ক্ষেত্রফলের একক: \\( \\text{m}^2 \\)<br>সুতরাং, তড়িৎফ্লাক্সের একক = \\( \\frac{\\text{V}}{\\text{m}} \\times \\text{m}^2 = \\text{V}\\cdot\\text{m} \\) (ভোল্ট-মিটার)।",
+"আইনস্টাইনের আলোক-তড়িৎ সমীকরণ শক্তির সংরক্ষণ নীতির উপর ভিত্তি করে প্রতিষ্ঠিত। যখন একটি \\( h\\nu \\) শক্তির ফোটন কোনো ধাতব পৃষ্ঠে আপতিত হয়, তখন সেই শক্তির কিছু অংশ ইলেকট্রনকে ধাতু থেকে মুক্ত করতে ব্যয় হয়, যাকে কার্যঅপেক্ষক (\\( W \\)) বলে। বাকি শক্তি ইলেকট্রনের গতিশক্তিতে (\\( \\frac{1}{2}mv^2 \\)) রূপান্তরিত হয়।<br><br>সুতরাং, ফোটনের মোট শক্তি = কার্যঅপেক্ষক + সর্বোচ্চ গতিশক্তি<br>\\( h\\nu = W + \\frac{1}{2}mv_{\\text{max}}^2 \\) <br>বা, \\( h\\nu = \\frac{1}{2}mv_{\\text{max}}^2 + W \\)। এটিই সঠিক সমীকরণ।",
+"তড়িৎচৌম্বকীয় তরঙ্গের তত্ত্ব অনুযায়ী, শূন্যস্থানে আলোর বেগ (\\( c \\)) এবং শূন্যস্থানের ভেদ্যতা (\\( \\mu_0 \\)) ও পরাবৈদ্যুতিক ধ্রুবক (\\( \\epsilon_0 \\))-এর মধ্যে সম্পর্ক হলো: \\( c = \\frac{1}{\\sqrt{\\mu_0 \\epsilon_0}} \\)।<br><br>অতএব, \\( \\sqrt{\\mu_0 \\epsilon_0} = \\frac{1}{c} \\)।<br>আমরা জানি, বেগের (\\( c \\)) মাত্রা = \\( [L T^{-1}] \\)।<br>সুতরাং, \\( (\\mu_0 \\epsilon_0)^{1/2} \\)-এর মাত্রা হবে \\( \\frac{1}{[L T^{-1}]} = [L^{-1} T] \\)।",
+"প্রোটন হলো ধনাত্মক আধানযুক্ত কণা। দুটি প্রোটনকে পরস্পরের কাছাকাছি আনলে এদের মধ্যে কুলম্বের বিকর্ষণ বল কাজ করে। এই বিকর্ষণ বলের বিরুদ্ধে কাজ করে এদেরকে কাছাকাছি আনতে হয়।<br><br>তড়িৎ স্থিতিশক্তির রাশিমালা: \\( U = \\frac{1}{4\\pi\\epsilon_0} \\frac{q_1 q_2}{r} \\)।<br>যেহেতু দুটি প্রোটনের আধান (\\( q_1, q_2 \\)) ধনাত্মক, তাই গুণফল ধনাত্মক হবে। দূরত্ব \\( r \\) হ্রাস পেলে স্থিতিশক্তি \\( U \\) বৃদ্ধি পাবে।",
+"বোর মডেলে হাইড্রোজেন পরমাণুর \\( n \\)-তম কক্ষপথের ব্যাসার্ধের রাশিমালা হলো: \\( r_n = \\frac{\\epsilon_0 h^2 n^2}{\\pi m e^2} \\)। এখানে, বাকি সবকিছু ধ্রুবক হওয়ায় \\( r_n \\propto n^2 \\)। অর্থাৎ ব্যাসার্ধ \\( n^2 \\)-এর সমানুপাতী।<br><br>অন্যান্য বিবৃতিগুলি ভুল কারণ: কৌণিক ভরবেগ \\( \\frac{h}{2\\pi} \\)-এর পূর্ণ গুণিতক, মোট শক্তি \\( E_n \\propto \\frac{1}{n^2} \\), এবং স্থিতিশক্তির মান গতিশক্তির দ্বিগুণ (চিহ্ন ঋণাত্মক)।",
+"অবাধ পতনের ক্ষেত্রে আদি বেগ \\( u = 0 \\)। গ্যালিলিওর সমীকরণ থেকে আমরা জানি, \\( t \\) সেকেন্ডে অতিক্রান্ত দূরত্ব \\( S = ut + \\frac{1}{2}gt^2 \\)।<br><br>যেহেতু \\( u = 0 \\), তাই \\( S = \\frac{1}{2}gt^2 \\)।<br>এখানে অভিকর্ষজ ত্বরণ (\\( g \\)) ধ্রুবক। সুতরাং, অতিক্রান্ত দূরত্ব সময়ের বর্গের সমানুপাতিক। যদি সময় \\( n \\) সেকেন্ড হয়, তবে \\( S \\propto n^2 \\)।",
+"পৃথিবীর আবর্তনের জন্য নিরক্ষরেখায় কোনো বস্তুর উপর কেন্দ্রাতিগ বল (Centrifugal force) কাজ করে, যার মান \\( m\\omega^2R \\)। বস্তুর আপাত ওজন \\( W' = mg - m\\omega^2R \\)।<br><br>বস্তুটি ভারহীন হলে, \\( W' = 0 \\) হবে।<br>অর্থাৎ, \\( mg = m\\omega^2R \\implies \\omega^2 = \\frac{g}{R} \\implies \\omega = \\sqrt{\\frac{g}{R}} \\)।<br>দিনের পর্যায়কাল \\( T = \\frac{2\\pi}{\\omega} = \\frac{2\\pi}{\\sqrt{g/R}} = 2\\pi\\sqrt{\\frac{R}{g}} \\)।",
+"সিলিকন (Si) একটি অর্ধপরিবাহী (Semiconductor)। পরম শূন্য তাপমাত্রায় এটি অন্তরক হিসেবে কাজ করে। কিন্তু উষ্ণতা বৃদ্ধি করলে সমযোজী বন্ধন ভেঙে মুক্ত ইলেকট্রন ও হোল (hole)-এর সৃষ্টি হয়।<br><br>আধান বাহকের সংখ্যা বৃদ্ধি পাওয়ায় অর্ধপরিবাহীর পরিবাহিতা বৃদ্ধি পায় এবং রোধাঙ্ক (বা রোধ) দ্রুত হ্রাস পায়। এর উষ্ণতা গুণাঙ্ক (\\( \\alpha \\)) ঋণাত্মক। অন্যদিকে, তামা বা লোহার মতো ধাতুর ক্ষেত্রে উষ্ণতা বাড়লে রোধ বৃদ্ধি পায়।",
+"যখন ধারকের পাত দুটির মধ্যে ডাই-ইলেকট্রিক ফলক প্রবেশ করানো হয়, তখন তার ধারকত্ব (\\( C \\)) বৃদ্ধি পেয়ে \\( K \\cdot C \\) হয় (যেখানে \\( K \\) হলো পরাবৈদ্যুতিক ধ্রুবক)।<br><br>যেহেতু প্রশ্নটিতে উল্লেখ নেই যে ব্যাটারি যুক্ত আছে কিনা, ধরে নেওয়া হয় ধারকটি বিচ্ছিন্ন (Isolated)। বিচ্ছিন্ন অবস্থায় ধারকের মোট আধান (\\( Q \\)) সংরক্ষিত থাকে এবং অপরিবর্তিত থাকে। ধারকত্ব বাড়লে বিভব পার্থক্য (\\( V = Q/C \\)) এবং শক্তি (\\( E = Q^2/2C \\)) হ্রাস পায়।",
+"হাইড্রোজেনের বর্ণালীতে ইলেকট্রন উচ্চতর শক্তির কক্ষপথ থেকে যখন \\( n = 2 \\) (দ্বিতীয় কক্ষপথ)-এ নেমে আসে, তখন যে বিকিরণ নির্গত হয় তাকে বামার শ্রেণি (Balmer series) বলা হয়।<br><br>এই শ্রেণির বিকিরণের তরঙ্গদৈর্ঘ্য প্রায় 400 nm থেকে 700 nm এর মধ্যে থাকে, যা দৃশ্যমান আলোর (Visible light) তরঙ্গদৈর্ঘ্যের পরিসর। লাইম্যান শ্রেণি অতিবেগুনি (UV) অঞ্চলে এবং প্যাশেন, ব্র্যাকেট ও ফান্ড শ্রেণি অবলোহিত (IR) অঞ্চলে পড়ে।",
+"একটি সাইন তরঙ্গের (Sinusoidal A.C. voltage) সমীকরণ হলো \\( V = V_0 \\sin(\\omega t) \\)।<br><br>একটি পূর্ণচক্রে (পর্যায়কাল \\( T \\)), তরঙ্গের ধনাত্মক অর্ধাংশের ক্ষেত্রফল এবং ঋণাত্মক অর্ধাংশের ক্ষেত্রফল সমান ও বিপরীতমুখী হয়। ফলে একটি সম্পূর্ণ পর্যায়ের জন্য ভোল্টেজের গড় মান (Average value) শূন্য (0) হয়। তবে এর RMS মান হয় \\( \\frac{V_0}{\\sqrt{2}} \\)।",
+"নিউক্লিয়াসের ব্যাসার্ধ (\\( R \\)) তার ভরসংখ্যার (\\( A \\)) সাথে সম্পর্কিত: \\( R = R_0 A^{1/3} \\)।<br><br>অ্যালুমিনিয়ামের ক্ষেত্রে: \\( R_{Al} = R_0 (27)^{1/3} = R_0 \\times 3 = 3.6 \\text{ Fermi} \\implies R_0 = 1.2 \\text{ Fermi} \\)।<br>টেলুরিয়ামের ক্ষেত্রে: \\( R_{Te} = R_0 (125)^{1/3} = R_0 \\times 5 \\)।<br>মান বসিয়ে পাই: \\( R_{Te} = 1.2 \\times 5 = 6.0 \\text{ Fermi} \\)।",
+"ধরি, প্রথম পদার্থের ভর \\( m_1 \\) এবং দ্বিতীয়টির ভর \\( m_2 \\)। সম আয়তন (\\( V \\)) মেশানো হলে:<br>\\( m_1 = d_1 V \\) এবং \\( m_2 = d_2 V \\)।<br><br>মিশ্রণের মোট ভর = \\( m_1 + m_2 = d_1 V + d_2 V = V(d_1 + d_2) \\)।<br>মিশ্রণের মোট আয়তন = \\( V + V = 2V \\)।<br>মিশ্রণের ঘনত্ব \\( = \\frac{\\text{মোট ভর}}{\\text{মোট আয়তন}} = \\frac{V(d_1 + d_2)}{2V} = \\frac{d_1 + d_2}{2} \\) বা \\( \\frac{1}{2}(d_1 + d_2) \\)।",
+"যেকোনো নিউক্লীয় বিক্রিয়ায় ভরসংখ্যা (A) এবং পারমাণবিক সংখ্যা (Z) সংরক্ষিত থাকে।<br><br>বিক্রিয়ার বামদিকে: মোট ভরসংখ্যা = \\( 1 + 235 = 236 \\)। মোট পারমাণবিক সংখ্যা = \\( 0 + 92 = 92 \\)।<br>বিক্রিয়ার ডানদিকে ধরি অজ্ঞাত মৌলটি \\( {}_{Z}X^{A} \\)।<br>মোট ভরসংখ্যা = \\( 141 + A + 3 \\times 1 = 144 + A \\)। অতএব, \\( 236 = 144 + A \\implies A = 92 \\)।<br>মোট পারমাণবিক সংখ্যা = \\( 56 + Z + 3 \\times 0 = 56 + Z \\)। অতএব, \\( 92 = 56 + Z \\implies Z = 36 \\)।<br>মৌলটি হলো ক্রিপ্টন, \\( {}_{36}Kr^{92} \\)।",
+"নিউটনের গতির দ্বিতীয় সূত্র থেকে আমরা জানি, বলের ঘাত (Impulse) = প্রযুক্ত বল \\( \\times \\) সময় = ভরবেগের পরিবর্তন (\\( \\Delta p \\))।<br><br>যেহেতু উভয় বস্তুর উপর একই পরিমাণ বল (\\( F \\)) একই সময় (\\( t \\)) ধরে কাজ করছে, তাই উভয়ের উপর প্রযুক্ত বলের ঘাত (\\( F \\times t \\)) সমান হবে। ফলস্বরূপ, বস্তুর ভর যাই হোক না কেন, উভয় বস্তুর ভরবেগের পরিবর্তন (\\( \\Delta p \\)) সমান হবে।",
+"রকেটের গতি রৈখিক ভরবেগের সংরক্ষণ (Conservation of linear momentum) নীতির উপর ভিত্তি করে কাজ করে।<br><br>শুরুতে রকেট ও জ্বালানির মোট ভরবেগ শূন্য থাকে। যখন প্রচণ্ড বেগে পেছনের দিকে গ্যাস নির্গত হয়, তখন গ্যাসের একটি নির্দিষ্ট ভরবেগ থাকে। ভরবেগ সংরক্ষণের জন্য রকেটটিকে সামনের দিকে সমপরিমাণ ভরবেগ লাভ করতে হয়। নিউটনের তৃতীয় সূত্র দিয়েও এটি ব্যাখ্যা করা যায়, তবে মূল ভিত্তি হলো রৈখিক ভরবেগের সংরক্ষণ।",
+"বাতিটির রোধ \\( R = \\frac{V^2}{P} = \\frac{60^2}{12} = 300 \\, \\Omega \\)।<br>বাতিটির স্বাভাবিক তড়িৎপ্রবাহ \\( I = \\frac{P}{V} = \\frac{12}{60} = 0.2 \\text{ A} \\)।<br><br>এখন 220V লাইনে বাতিটিকে পূর্ণভাবে জ্বালাতে হলে, বর্তনীতে প্রবাহ \\( 0.2 \\text{ A} \\) রাখতে হবে এবং বাতির দুই প্রান্তে 60V থাকতে হবে। বাকি বিভব (\\( 220 - 60 = 160\\text{V} \\)) পতন হবে শ্রেণিসমবায়ে যুক্ত অতিরিক্ত রোধ \\( R_s \\)-এ।<br>\\( V_s = I \\times R_s \\implies 160 = 0.2 \\times R_s \\implies R_s = \\frac{160}{0.2} = 800 \\, \\Omega \\)।<br>সঠিক উত্তর অপশনে নেই, যদি 12W না হয়ে অন্য কিছু হত তবে 100 ওহম আসতে পারতো, তবে সমীকরণ অনুযায়ী উত্তর 800 ওহম। কাছাকাছি উত্তর নেই, তবে এটি গাণিতিক পদ্ধতি। (অপশনে ত্রুটি থাকতে পারে)।",
+"আলোকতড়িৎ ক্রিয়া (Photoelectric effect) আলোর তরঙ্গ ধর্ম দ্বারা ব্যাখ্যা করা সম্ভব নয়। তরঙ্গ তত্ত্বে বলা জানালা আলোর শক্তি সময়ের সাথে সাথে ধীরে ধীরে সঞ্চিত হয়, কিন্তু আলোকতড়িৎ ক্রিয়ায় আলো পড়ার সাথে সাথেই ইলেকট্রন নির্গত হয়।<br><br>এই ঘটনা প্রমাণের জন্য আইনস্টাইন আলোর কণিকা ধর্ম (Particle nature) বা ফোটন তত্ত্ব ব্যবহার করেন। অন্যদিকে, ব্যতিচার, অপবর্তন এবং সমবর্তন (Polarization) আলোর তরঙ্গ তত্ত্ব দ্বারা স্পষ্টভাবে প্রমাণিত হয়।",
+"পৃষ্ঠটান (Surface Tension) হলো তরলের পৃষ্ঠের উপর কল্পিত কোনো রেখার একক দৈর্ঘ্যে লম্বভাবে ক্রিয়াশীল বল।<br><br>গাণিতিকভাবে, পৃষ্ঠটান \\( T = \\frac{\\text{বল (F)}}{\\text{দৈর্ঘ্য (L)}} \\)।<br>বলের মাত্রা \\( [F] = [MLT^{-2}] \\)।<br>দৈর্ঘ্যের মাত্রা \\( [L] = [L] \\)।<br>অতএব, পৃষ্ঠটানের মাত্রা \\( [T] = \\frac{[MLT^{-2}]}{[L]} = [ML^0T^{-2}] \\) বা \\( [MT^{-2}] \\)।",
+"তারের আয়তন সর্বদা ধ্রুবক থাকে (\\( V = A \\times l \\))।<br>তারটিকে টেনে ব্যাসার্ধ \\( r' = \\frac{r}{2} \\) করা হলো।<br>নতুন ক্ষেত্রফল \\( A' = \\pi (r')^2 = \\pi \\left(\\frac{r}{2}\\right)^2 = \\frac{\\pi r^2}{4} = \\frac{A}{4} \\)।<br><br>আয়তন ধ্রুবক থাকায় নতুন দৈর্ঘ্য \\( l' = 4l \\) হবে।<br>রোধের সূত্র: \\( R = \\rho \\frac{l}{A} \\)।<br>নতুন রোধ \\( R' = \\rho \\frac{l'}{A'} = \\rho \\frac{4l}{A/4} = 16 \\left(\\rho \\frac{l}{A}\\right) = 16R \\)।",
+"বর্গক্ষেত্রের কর্ণ \\( d \\) হলে, তার একটি বাহুর দৈর্ঘ্য \\( a = \\frac{d}{\\sqrt{2}} \\)।<br>বর্গক্ষেত্রের ক্ষেত্রফল \\( A = a^2 = \\left(\\frac{d}{\\sqrt{2}}\\right)^2 = \\frac{d^2}{2} \\)।<br><br>ত্রুটির সমীকরণ প্রয়োগ করে পাই:<br>\\( \\frac{\\Delta A}{A} \\times 100\\% = 2 \\times \\left(\\frac{\\Delta d}{d} \\times 100\\%\\right) \\)।<br>প্রশ্নে কর্ণের পরিমাপে ত্রুটি \\( \\left(\\frac{\\Delta d}{d} \\times 100\\%\\right) = 0.5\\% \\)।<br>অতএব, ক্ষেত্রফল পরিমাপের ত্রুটি = \\( 2 \\times 0.5\\% = 1\\% \\)।",
+"পদার্থের চৌম্বকীয় ধর্ম অনুসারে:<br>১. প্রতিচৌম্বক (Diamagnetic): চৌম্বক ক্ষেত্র দ্বারা দুর্বলভাবে বিকর্ষিত হয়। যেমন- বিসমাথ, জল, সোনা, তামা।<br>২. পরাচৌম্বক (Paramagnetic): চৌম্বক ক্ষেত্র দ্বারা দুর্বলভাবে আকর্ষিত হয়। যেমন- অ্যালুমিনিয়াম, সোডিয়াম।<br>৩. অয়শ্চৌম্বক (Ferromagnetic): চৌম্বক ক্ষেত্র দ্বারা প্রবলভাবে আকর্ষিত হয়। যেমন- লোহা, নিকেল, কোবাল্ট।<br>অতএব, প্রদত্ত বিকল্পগুলির মধ্যে বিসমাথ হলো প্রতিচৌম্বক পদার্থ।",
+"সমীকরণের মাত্রিক সমতা (Dimensional Homogeneity) নীতি অনুসারে, একটি সমীকরণের উভয় দিকের প্রতিটি পদের মাত্রা সমান হতে হবে।<br><br>প্রদত্ত সমীকরণ: \\( S = a + bt + ct^2 \\)।<br>এখানে, \\( S \\)-এর একক মিটার (m)।<br>সুতরাং, \\( ct^2 \\)-এর এককও মিটার হতে হবে।<br>\\( [c] \\times (\\text{সেকেন্ড})^2 = \\text{মিটার} \\implies [c] = \\frac{\\text{মিটার}}{(\\text{সেকেন্ড})^2} = \\text{মিটার/সেকেন্ড}^2 \\) (m/s²)।",
+"তড়িৎবিভব (\\( V \\)) এবং তড়িৎপ্রাবল্যের (\\( \\vec{E} \\)) সম্পর্ক হলো: \\( \\vec{E} = -\\vec{\\nabla}V \\) বা \\( -\\left( \\frac{\\partial V}{\\partial x}\\hat{i} + \\frac{\\partial V}{\\partial y}\\hat{j} + \\frac{\\partial V}{\\partial z}\\hat{k} \\right) \\)।<br><br>দেওয়া আছে, \\( V = -5x + 3y + \\sqrt{15}z \\)।<br>\\( E_x = -\\frac{\\partial V}{\\partial x} = -(-5) = 5 \\)<br>\\( E_y = -\\frac{\\partial V}{\\partial y} = -3 \\)<br>\\( E_z = -\\frac{\\partial V}{\\partial z} = -\\sqrt{15} \\)<br>প্রাবল্যের মান \\( |\\vec{E}| = \\sqrt{(5)^2 + (-3)^2 + (-\\sqrt{15})^2} = \\sqrt{25 + 9 + 15} = \\sqrt{49} = 7 \\text{ V/m} \\)।",
+"তড়িৎপ্রবাহমাত্রা \\( I = \\frac{Q}{t} \\)। আবার মোট আধান \\( Q = ne \\), যেখানে \\( n \\) হলো ইলেকট্রনের সংখ্যা এবং \\( e \\) হলো একটি ইলেকট্রনের আধান (\\( 1.6 \\times 10^{-19} \\text{ C} \\))।<br><br>অতএব, \\( I = \\frac{ne}{t} \\implies \\frac{n}{t} = \\frac{I}{e} \\)।<br>দেওয়া আছে, \\( I = 1 \\text{ mA} = 10^{-3} \\text{ A} \\)।<br>ইলেকট্রনের সংখ্যা প্রতি সেকেন্ডে \\( (\\frac{n}{t}) = \\frac{10^{-3}}{1.6 \\times 10^{-19}} = 6.25 \\times 10^{15} \\)।",
+"নিউটনের মতে শব্দ সঞ্চালন একটি সমোষ্ণ (Isothermal) প্রক্রিয়া। কিন্তু ল্যাপ্লাস প্রমাণ করেন যে শব্দের গতি এত দ্রুত হয় যে তাপ আদান-প্রদানের সময় পাওয়া যায় না, অর্থাৎ এটি একটি রুদ্ধতাপীয় (Adiabatic) প্রক্রিয়া।<br><br>রুদ্ধতাপীয় প্রক্রিয়ায় আয়তন গুণাঙ্ক (Bulk modulus, \\( K \\)) গ্যাসের চাপের (\\( P \\)) \\( \\gamma \\) গুণ হয় (যেখানে \\( \\gamma = C_p/C_v \\))।<br>সুতরাং, শব্দের বেগের সমীকরণ: \\( V = \\sqrt{\\frac{K}{\\rho}} = \\sqrt{\\frac{\\gamma P}{\\rho}} \\)। এটিই ল্যাপ্লাসের সংশোধিত সমীকরণ।",
+"বলের ঘাত (Impulse, \\( J \\)) হলো বৃহৎ মানের বল খুব অল্প সময়ের জন্য ক্রিয়া করলে বল ও সময়ের গুণফল।<br>বলের ঘাত = বল \\( \\times \\) সময় = \\( F \\times \\Delta t \\)।<br><br>নিউটনের দ্বিতীয় সূত্র থেকে, \\( F = \\frac{\\Delta p}{\\Delta t} \\implies F \\times \\Delta t = \\Delta p \\)।<br>অর্থাৎ, বলের ঘাত ভরবেগের পরিবর্তনের (\\( \\Delta p \\)) সমান। তাই বলের ঘাতের একক (N·s বা kg·m/s) এবং ভরবেগের একক অভিন্ন।",
+"তড়িৎপ্রবাহমাত্রা (\\( I \\)) এবং বিচলন বেগের (\\( v_d \\)) মধ্যে সম্পর্ক হলো: \\( I = n A e v_d \\)।<br>যেখানে, \\( n \\) = মুক্ত ইলেকট্রনের সংখ্যা ঘনত্ব, \\( A \\) = প্রস্থচ্ছেদের ক্ষেত্রফল এবং \\( e \\) = ইলেকট্রনের আধান।<br><br>যদি প্রবাহমাত্রা (\\( I \\)) এবং অন্যান্য রাশি স্থির থাকে, তবে \\( v_d = \\frac{I}{nAe} \\)।<br>অতএব, দেখা যাচ্ছে যে বিচলন বেগ (\\( v_d \\)) ইলেকট্রনের সংখ্যা ঘনত্বের (\\( n \\)) ব্যস্তানুপাতিক। অর্থাৎ, \\( v_d \\propto \\frac{1}{n} \\)।",
+"হুইটস্টোন ব্রিজ (Wheatstone bridge) হলো চারটি রোধ, একটি গ্যালভানোমিটার এবং একটি ব্যাটারির সমন্বয়ে গঠিত একটি বিশেষ বর্তনী।<br><br>এর মূল কাজ হলো তিনটি জানা রোধের সাহায্যে একটি অজানা রোধের (Resistance) মান অত্যন্ত নিখুঁতভাবে নির্ণয় করা। সাম্যাবস্থায় ব্রিজের নীতি হলো \\( \\frac{P}{Q} = \\frac{R}{S} \\)। মিটার ব্রিজ এবং পোস্ট অফিস বক্স এই নীতির উপর ভিত্তি করে কাজ করে।",
+"দুটি ভেক্টরের ক্রস গুণফলের মান: \\( |\\vec{A} \\times \\vec{B}| = AB \\sin\\theta \\)।<br>ডট গুণফলের মান: \\( |\\vec{A} \\cdot \\vec{B}| = AB \\cos\\theta \\)।<br><br>শর্তানুসারে, \\( AB \\sin\\theta = AB \\cos\\theta \\)।<br>যেহেতু \\( A \\) এবং \\( B \\) শূন্য নয়, তাই সমীকরণের উভয় পক্ষকে \\( AB \\cos\\theta \\) দিয়ে ভাগ করলে পাই:<br>\\( \\frac{\\sin\\theta}{\\cos\\theta} = 1 \\implies \\tan\\theta = 1 \\)।<br>সুতরাং, কোণ \\( \\theta = 45^\\circ \\)।",
+"সংকট কোণ (Critical angle, \\( \\theta_c \\)) হলো ঘন মাধ্যম থেকে লঘু মাধ্যমে আলো যাওয়ার সময় আপতন কোণের সেই মান যার জন্য প্রতিসরণ কোণ 90° হয়।<br><br>স্নেলের সূত্র অনুযায়ী, \\( \\sin \\theta_c = \\frac{\\mu_\\text{বিরল}}{\\mu_\\text{ঘন}} \\)।<br>এখানে, কাচ ঘন মাধ্যম (\\( \\mu_g = 3/2 \\)) এবং জল বিরল মাধ্যম (\\( \\mu_w = 4/3 \\))।<br>\\( \\sin \\theta_c = \\frac{4/3}{3/2} = \\frac{4}{3} \\times \\frac{2}{3} = \\frac{8}{9} \\)।<br>অতএব, সংকট কোণ \\( \\theta_c = \\sin^{-1}\\left(\\frac{8}{9}\\right) \\)।",
+"তরঙ্গমুখ (Wavefront) হলো সেই সকল বিন্দুর সঞ্চারপথ যেখানে আলোকরশ্মি একই দশায় থাকে।<br><br>১. বিন্দু উৎস থেকে নির্গত আলো গোলীয় (Spherical) তরঙ্গমুখ তৈরি করে।<br>২. রৈখিক উৎস (যেমন সরু স্লিট) থেকে নির্গত আলো চোঙাকৃতি (Cylindrical) তরঙ্গমুখ তৈরি করে।<br>৩. যখন উৎস অসীম দূরত্বে থাকে (যেমন সূর্য বা নক্ষত্র), তখন তরঙ্গমুখের বক্রতা ব্যাসার্ধ অসীম হয় এবং সেই গোলকের একটি ছোট অংশকে সমতলীয় (Planar) তরঙ্গমুখ বলে মনে হয়।",
+"ভূ-চৌম্বকক্ষেত্রের মোট প্রাবল্যকে (\\( I \\)) দুটি উপাংশে ভাগ করা যায়: অনুভূমিক উপাংশ (\\( H = I \\cos\\delta \\)) এবং উল্লম্ব উপাংশ (\\( V = I \\sin\\delta \\)), যেখানে \\( \\delta \\) হলো বিনতি কোণ (Angle of dip)।<br><br>প্রশ্নে বলা হয়েছে উল্লম্ব উপাংশ \\( V = 0 \\)।<br>অর্থাৎ, \\( I \\sin\\delta = 0 \\implies \\sin\\delta = 0 \\) (যেহেতু মোট প্রাবল্য শূন্য নয়)।<br>অতএব, বিনতি কোণ \\( \\delta = 0^\\circ \\)। এটি চৌম্বক নিরক্ষরেখায় ঘটে।",
+"অবাধ পতনশীল বস্তুর ক্ষেত্রে আদিবেগ \\( u = 0 \\)। \\( t \\)-তম সেকেন্ডে অতিক্রান্ত দূরত্ব: \\( S_t = u + \\frac{1}{2}g(2t - 1) = \\frac{1}{2}g(2t - 1) \\)।<br><br>বস্তুটি যে দূরত্ব নিচে নামবে, ঠিক সেই পরিমাণ উচ্চতা কমবে। উচ্চতা কমার ফলে স্থিতিশক্তির হ্রাস ঘটে।<br>স্থিতিশক্তির হ্রাস = \\( mgS_t \\)<br>= \\( mg \\times \\frac{1}{2}g(2t - 1) \\)<br>= \\( \\frac{1}{2}mg^2(2t - 1) \\)। শক্তির সংরক্ষণ নীতি অনুযায়ী এই স্থিতিশক্তি গতিশক্তিতে রূপান্তরিত হয়।",
+"বর্তনীতে তড়িৎচালক বল (\\( E \\)), মোট রোধ (বহিঃস্থ রোধ \\( R \\) + অভ্যন্তরীণ রোধ \\( r \\)) এবং তড়িৎপ্রবাহ (\\( I \\))-এর মধ্যে সম্পর্ক হলো: \\( I = \\frac{E}{R + r} \\) বা \\( E = I(R + r) \\)।<br><br>দেওয়া আছে, \\( E = 1.5 \\text{ V} \\), \\( R = 0.042 \\, \\Omega \\), \\( I = 15 \\text{ A} \\)।<br>সমীকরণে মান বসিয়ে পাই: \\( 1.5 = 15(0.042 + r) \\)<br>\\( \\implies 0.042 + r = \\frac{1.5}{15} = 0.1 \\)<br>\\( \\implies r = 0.1 - 0.042 = 0.058 \\, \\Omega \\)।<br>নিকটতম মান হিসেবে \\( 0.06 \\, \\Omega \\) সঠিক উত্তর।",
+"আলোক-তড়িৎ ক্রিয়া হলো সেই ঘটনা যেখানে আলোর প্রভাবে ধাতব পৃষ্ঠ থেকে ইলেকট্রন নির্গত হয়। আলোর চিরায়ত তরঙ্গ তত্ত্ব দিয়ে এই ঘটনার তাৎক্ষণিক প্রকৃতি এবং প্রারম্ভিক কম্পাঙ্কের অস্তিত্ব ব্যাখ্যা করা যায় না।<br><br>আইনস্টাইন প্লাঙ্কের কোয়ান্টাম তত্ত্ব ব্যবহার করে দেখান যে, আলো অসংখ্য শক্তি-প্যাকেট বা 'ফোটন' কণা হিসেবে আচরণ করে। প্রতিটি ফোটনের শক্তি \\( E = h\\nu \\)। এটি পরিষ্কারভাবে প্রমাণ করে যে আলোর কণিকা ধর্ম (Particle nature) বিদ্যমান।",
+"বদ্ধ পাত্রে রাখা কোনো তরল বা গ্যাসের কোনো অংশে চাপ প্রয়োগ করলে, সেই চাপ অপরিবর্তিত মানে তরল বা গ্যাসের সবদিকে সমানভাবে সঞ্চালিত হয়। এটি হলো পাস্কালের সূত্র।<br><br>এই নীতির ওপর ভিত্তি করে হাইড্রলিক প্রেস বা হাইড্রলিক ব্রেক তৈরি করা হয়। হাইড্রলিক প্রেসে ছোট পিস্টনে অল্প বল প্রয়োগ করে বড় পিস্টনে বহুগুণ বেশি বল (ঘাত) লাভ করা যায়। একেই ঘাত বৃদ্ধির নীতি (Principle of multiplication of thrust) বলা হয়।",
+"ধাতুর কার্য অপেক্ষক (Work function, \\( W \\)) হলো সেই ন্যূনতম শক্তি যা প্রয়োগ করলে ধাতু থেকে ইলেকট্রন জাস্ট মুক্ত হয়। এর মান সূচনা কম্পাঙ্কের (\\( \\nu_0 \\)) সাথে সম্পর্কিত: \\( W = h\\nu_0 \\)।<br><br>দেওয়া আছে, \\( h = 6.4 \\times 10^{-34} \\text{ J\\cdot s} \\) এবং \\( \\nu_0 = 10^{15} \\text{ Hz} \\)।<br>\\( W = 6.4 \\times 10^{-34} \\times 10^{15} = 6.4 \\times 10^{-19} \\text{ J} \\)।<br>জুলকে ইলেকট্রন-ভোল্ট (eV)-এ রূপান্তর করতে \\( 1.6 \\times 10^{-19} \\) দিয়ে ভাগ করতে হয়:<br>\\( W = \\frac{6.4 \\times 10^{-19}}{1.6 \\times 10^{-19}} = 4.0 \\text{ eV} \\)।",
+"আদর্শ গ্যাস সমীকরণ হলো: \\( PV = nRT \\) বা \\( RT = \\frac{PV}{n} \\)।<br><br>এখানে, চাপ (\\( P \\)) = বল/ক্ষেত্রফল, তাই \\( [P] = \\frac{[MLT^{-2}]}{[L^2]} = [ML^{-1}T^{-2}] \\)।<br>আয়তন (\\( V \\))-এর মাত্রা = \\( [L^3] \\)।<br>মোল সংখ্যা (\\( n \\)) মাত্রাহীন।<br>সুতরাং, \\( RT \\)-এর মাত্রা = \\( [PV] = [ML^{-1}T^{-2}] \\times [L^3] = [ML^2T^{-2}] \\)।<br>এটি শক্তি (বা কার্য)-এর মাত্রীয় সংকেতের সমান।",
+"প্রদত্ত সরল দোলগতির সমীকরণ: \\( x = A \\sin \\omega t + B \\cos \\omega t \\)।<br>ধরি, \\( A = R \\cos \\phi \\) এবং \\( B = R \\sin \\phi \\)।<br>তাহলে, \\( x = R \\cos \\phi \\sin \\omega t + R \\sin \\phi \\cos \\omega t = R \\sin(\\omega t + \\phi) \\)।<br>এটি একটি সরল দোলগতির আদর্শ সমীকরণ, যেখানে বিস্তার \\( R = \\sqrt{A^2 + B^2} \\) এবং প্রারম্ভিক দশা (Epoch) হলো \\( \\phi \\)।<br>\\( \\phi \\) নির্ণয়ের জন্য: \\( \\frac{R \\sin \\phi}{R \\cos \\phi} = \\frac{B}{A} \\implies \\tan \\phi = \\frac{B}{A} \\implies \\phi = \\tan^{-1}\\left(\\frac{B}{A}\\right) \\)।",
+"পৃথিবীপৃষ্ঠে অভিকর্ষজ ত্বরণের রাশিমালা: \\( g = \\frac{GM}{R^2} \\)।<br>যেহেতু ভর (\\( M \\)) অপরিবর্তিত, তাই \\( g \\propto \\frac{1}{R^2} \\)।<br><br>অল্প পরিবর্তনের জন্য অন্তরকলন (Differentiation) করে পাই:<br>\\( \\frac{\\Delta g}{g} = -2 \\frac{\\Delta R}{R} \\)।<br>ব্যাসার্ধ 1% কমানো হয়েছে, অর্থাৎ \\( \\frac{\\Delta R}{R} = -1\\% \\)।<br>সুতরাং, \\( \\frac{\\Delta g}{g} = -2 \\times (-1\\%) = +2\\% \\)।<br>ধনাত্মক চিহ্ন নির্দেশ করে যে অভিকর্ষজ ত্বরণের মান 2% বৃদ্ধি পাবে।",
+"বোর তত্ত্ব অনুযায়ী হাইড্রোজেন পরমাণুর \\( n \\)-তম কক্ষপথের শক্তির রাশিমালা হলো: \\( E_n = -\\frac{13.6}{n^2} \\text{ eV} \\)।<br><br>প্রথম বোর কক্ষপথের (\\( n = 1 \\)) শক্তি \\( E_1 = -13.6 \\text{ eV} \\) (প্রশ্নে প্রদত্ত)।<br>তৃতীয় বোর কক্ষপথের (\\( n = 3 \\)) শক্তি হবে:<br>\\( E_3 = -\\frac{13.6}{3^2} = -\\frac{13.6}{9} \\text{ eV} \\)।<br>হিসাব করলে পাওয়া যায়, \\( E_3 = -1.51 \\text{ eV} \\)।",
+"কোনো বল দ্বারা কৃত কার্য যদি বস্তুর যাত্রাপথের ওপর নির্ভর না করে শুধুমাত্র তার প্রারম্ভিক ও অন্তিম অবস্থানের ওপর নির্ভর করে, তবে সেই বলকে সংরক্ষী বল (Conservative force) বলে। মহাকর্ষ বল, স্থিততড়িৎ বল এবং চৌম্বক বল সংরক্ষী বলের উদাহরণ।<br><br>বিপরীতপক্ষে, যে বল দ্বারা কৃত কার্য যাত্রাপথের ওপর নির্ভর করে, তাকে অসংরক্ষী বল (Non-conservative force) বলে। ঘর্ষণ বল, সান্দ্রতা বল হলো অসংরক্ষী বল কারণ এরা সর্বদা গতির বিরুদ্ধে কাজ করে এবং এদের দ্বারা কৃত কার্য তাপ হিসেবে নষ্ট হয়।",
+"স্থির তাড়িতিক স্থিতিশক্তির সমীকরণ হলো: \\( U = \\frac{1}{4\\pi\\epsilon_0} \\frac{q_1 q_2}{r} \\)।<br><br>যেহেতু আধান দুটি সমচিত্র (একই প্রকৃতির, অর্থাৎ হয় দুটিই ধনাত্মক বা দুটিই ঋণাত্মক), তাই তাদের গুণফল \\( (q_1 q_2) \\) সর্বদা ধনাত্মক হবে। সমীকরণ থেকে বোঝা যায় যে স্থিতিশক্তি \\( U \\) দূরত্বের (\\( r \\)) ব্যস্তানুপাতিক।<br>সুতরাং, দূরত্ব \\( r \\) হ্রাস করলে স্থিতিশক্তি \\( U \\) বৃদ্ধি পাবে। বাস্তবে, সমধর্মী আধানকে বিকর্ষণ বলের বিরুদ্ধে কাছে আনতে বাহ্যিক কার্য করতে হয়, যা ব্যবস্থায় স্থিতিশক্তি হিসেবে সঞ্চিত হয়।",
+"ভরবেগ একটি ভেক্টর রাশি। ভরবেগ (\\( \\vec{p} = m\\vec{v} \\)) স্থির থাকার অর্থ হলো তার মান ও দিক উভয়ই স্থির।<br><br>ভরবেগ স্থির থাকলে বেগ (\\( \\vec{v} \\)) স্থির থাকে (যেহেতু ভর স্থির)। বেগের মানকে দ্রুতি (Speed) বলে। বেগ স্থির থাকলে দ্রুতি অবশ্যই স্থির থাকবে। কিন্তু দ্রুতি স্থির থাকলে বেগ স্থির নাও হতে পারে (যেমন বৃত্তাকার গতির ক্ষেত্রে)। প্রশ্নে বলা হয়েছে ভরবেগ স্থির, তাই বেগের মান ও দিক অপরিবর্তিত থাকে, ফলে দ্রুতি ধ্রুবক থাকে। (ত্বরণ ও বল এক্ষেত্রে শূন্য হবে)।",
+"বলের ঘাত (Impulse) = ভরবেগের পরিবর্তন (\\( \\Delta p \\))।<br>প্রাথমিক ভরবেগ \\( p_i = M \\times (+u) = Mu \\) (ব্যাটের দিকের গতির জন্য)।<br>প্রতিক্ষিপ্ত হওয়ার পর অন্তিম ভরবেগ \\( p_f = M \\times (-v) = -Mv \\) (বিপরীত দিকের গতির জন্য ঋণাত্মক)।<br><br>ভরবেগের পরিবর্তন = অন্তিম ভরবেগ - প্রাথমিক ভরবেগ<br>\\( \\Delta p = -Mv - Mu = -M(u + v) \\)।<br>ঘাতের মান (মডিউলাস) নিলে তা হবে \\( M(u + v) \\text{ N}\\cdot\\text{s} \\)।",
+"সমতল দর্পণে বস্তু ও প্রতিবিম্ব দর্পণ থেকে সর্বদা সমান দূরত্বে থাকে। ধরি, বস্তুর দূরত্ব \\( x \\)। তাহলে প্রতিবিম্বের দূরত্বও \\( x \\)। বস্তু থেকে প্রতিবিম্বের মোট দূরত্ব = \\( 2x \\)।<br><br>দর্পণ যদি \\( y \\) দূরত্ব পেছনে সরে যায়, তবে দর্পণ থেকে বস্তুর নতুন দূরত্ব হবে \\( (x+y) \\)। ফলে প্রতিবিম্বও দর্পণ থেকে \\( (x+y) \\) দূরত্বে গঠিত হবে।<br>নতুন অবস্থায় বস্তু ও প্রতিবিম্বের দূরত্ব = \\( 2(x+y) = 2x + 2y \\)।<br>অর্থাৎ প্রতিবিম্বটি \\( 2y \\) দূরত্বে সরে গেছে। দূরত্বের দ্বিগুণ সরণ হওয়ার কারণে, দর্পণ \\( a \\) ত্বরণে সরলে প্রতিবিম্ব \\( 2a \\) ত্বরণে দর্পণের সরণের দিকে (অর্থাৎ পিছনে) সরে যাবে।",
+"সরল অণুবীক্ষণ যন্ত্র (Simple microscope) মূলত একটি স্বল্প ফোকাস দৈর্ঘ্যের উত্তল লেন্স। বস্তুকে লেন্সের ফোকাস দূরত্বের (\\( f \\)) মধ্যে রাখলে এর একটি সমশীর্ষ ও বিবর্ধিত অসদ বিম্ব গঠিত হয়।<br><br>যখন প্রতিবিম্ব স্পষ্ট দর্শনের ন্যূনতম দূরত্বে (\\( D \\)) গঠিত হয়, তখন কৌণিক বিবর্ধনের (Magnification, \\( m \\)) সমীকরণ হয়:<br>\\( m = 1 + \\frac{D}{f} \\)।<br>যেখানে \\( D \\approx 25 \\text{ cm} \\) এবং \\( f \\) হলো লেন্সের ফোকাস দূরত্ব।",
+"কোনো বল যদি একটি পথে সংরক্ষী হয়, তবে তা তার অন্তর্নিহিত ধর্ম। সংরক্ষী বলের (যেমন মহাকর্ষ বা স্থির তড়িৎ বল) দ্বারা কৃত কার্য কেবল বস্তুর আদি ও অন্তিম অবস্থানের ওপর নির্ভর করে, কোন পথ অনুসরণ করা হলো তার ওপর নয়।<br><br>সুতরাং, একটি বল সংরক্ষী হলে তা যেকোনো পথেই (তা সেটিকে 'অসংরক্ষী পথ' বলা হোক বা যাই হোক) সংরক্ষী আচরণই করবে। অর্থাৎ বলের চরিত্র পথের ওপর নির্ভর করে না।",
+"ডায়ালাইসিস মেমব্রেন (Dialysis membrane) হলো এক ধরনের অর্ধভেদ্য পর্দা, যার মধ্য দিয়ে ক্ষুদ্র কণা পার হতে পারে কিন্তু বড় কণা পারে না।<br><br>দ্রাবক অণু, ছোট আয়ন এবং ক্রিস্টালয়েডের অণুগুলি সহজেই এই পর্দার সূক্ষ্ম ছিদ্র ভেদ করে চলাচল করতে পারে। কিন্তু কলয়েড কণাগুলি (যাদের আকার 1 nm থেকে 100 nm-এর মধ্যে হয়) আকারে তুলনামূলকভাবে বড় হওয়ায় ডায়ালাইসিস মেমব্রেনের মধ্য দিয়ে যেতে পারে 확장 (পার) হতে পারে না। এই পদ্ধতি ব্যবহার করেই রক্ত থেকে দূষিত পদার্থ (যেমন ইউরিয়া) ছেঁকে বের করা হয়।",
+"কাইনেটিক তত্ত্ব অনুযায়ী, একটি আদর্শ গ্যাসে অণুগুলির মধ্যে কোনো আন্তঃআণবিক আকর্ষণ বা বিকর্ষণ বল কাজ করে না। তাই আদর্শ গ্যাসের কোনো স্থিতিশক্তি থাকে না।<br><br>এর অভ্যন্তরীণ শক্তি সম্পূর্ণরূপে গ্যাস অণুগুলির গতিশক্তির সমষ্টির সমান। গাণিতিকভাবে, \\( U = \\frac{f}{2} nRT \\) (যেখানে \\( f \\) হলো স্বাধীনতার মাত্রা)। সমীকরণ থেকে স্পষ্ট যে, আদর্শ গ্যাসের অভ্যন্তরীণ শক্তি (\\( U \\)) শুধুমাত্র পরম উষ্ণতার (\\( T \\)) উপর নির্ভর করে, চাপ বা আয়তনের ওপর নয়।"
+];
+
+// ===== 55 QUESTIONS =====
+const QUESTIONS = [
+{n:1, text:"একটি ভারবিহীন অসম্প্রসারণযোগ্য তারের উভয়দিক থেকে 10N দিয়ে টানা হল। তারটির টান-", opts:["10 N","20 N","0 N","5 N"]},
+{n:2, text:"জলে ভাসমান একটি কাঠের ব্লকের কিছু অংশ জলের উপরে আছে। ব্লকের উপর উর্ধ্বঘাত-", opts:["কাঠের ব্লকের ওজনের সমান","কাঠের ব্লকের ওজনের চেয়ে কম","কাঠের ব্লকের ওজনের চেয়ে বেশি","নিমজ্জিত অংশের আয়তনের দ্বারা নির্ণীত হয়।"], single:true},
+{n:3, text:"মেরু অঞ্চলের বরফ গলে গেলে পৃথিবীতে দিনের দৈর্ঘ্য-", opts:["হ্রাস পাবে","বৃদ্ধি পাবে","অপরিবর্তিত থাকবে","গলনের হারের উপর নির্ভর করে বৃদ্ধি বা হ্রাস পাবে।"], single:true},
+{n:4, text:"গঠনমূলক ব্যতিচারের শর্ত হল, পথ পার্থক্য হতে হবে-", opts:["$(2n+1)\\dfrac{\\pi}{2}$","$2n\\dfrac{\\pi}{2}$","$(2n+1)\\pi$","$2n$"]},
+{n:5, text:"তড়িৎফ্লাক্সের SI একক হল-", opts:["Vm","$\\dfrac{V}{A}$","$\\dfrac{V}{m}$","Am"]},
+{n:6, text:"নিম্নলিখিত সমীকরণগুলির মধ্যে কোনটি আইনস্টাইনের আলোক-তড়িৎ ক্রিয়া সংক্রান্ত সমীকরণ?", opts:["$h\\nu = \\frac{1}{2}mv^2 - W$","$h\\nu = \\frac{1}{2}mv_{\\max}^2 + W$","$h\\nu = W - \\frac{1}{2}mv^2$","$h\\nu = mv - h\\nu$"]},
+{n:7, text:"$(\\mu_0 \\epsilon_0)^{1/2}$ এর মাত্রা হল-", opts:["$[LT^{-1}]$","$[L^{-1}T]$","$[L^2T^{-2}]$","$[L^{-2}T^{-2}]$"]},
+{n:8, text:"যদি দুটি প্রোটনকে পরস্পরের আরও কাছে আনা যায় তাহলে ব্যবস্থাটির স্থিতিশক্তি-", opts:["বৃদ্ধি পাবে","হ্রাস পাবে","একই থাকবে","গতিশক্তির সমান হবে।"]},
+{n:9, text:"হাইড্রোজেন পরমাণুর বোর মডেলে-", opts:["n-তম কক্ষের ব্যাসার্ধ $n^2$-এর সমানুপাতী","কোনো কক্ষে ইলেকট্রনটির কৌণিক ভরবেগ $\\frac{h}{2\\pi}$-এর পূর্ণ গুণিতক","n-তম কক্ষে ইলেকট্রনটির মোট শক্তি n-এর ব্যস্তানুপাতিক","যে-কোনো কক্ষে ইলেকট্রনটির স্থিতিশক্তির মান ওর গতিশক্তির চেয়ে বেশি।"], single:true},
+{n:10, text:"একটি ভূস্তরের চূড়া থেকে একটি বস্তু ছেড়ে দেওয়া হলে তা অবাধে পড়তে থাকল এবং n সেকেন্ডে S দূরত্ব অতিক্রম করল, তাহলে-", opts:["$S \\propto n^2$","$S \\propto n$","$S \\propto \\frac{1}{n^2}$","$S \\propto \\frac{1}{n}$"]},
+{n:11, text:"যদি পৃথিবীর কৌণিক বেগ বৃদ্ধি পেয়ে এমন হয় যে, কোনো বস্তু নিরক্ষরেখায় ভারহীন হয়, তবে দিনের পর্যায়কাল হবে-", opts:["$2\\pi\\sqrt{gR}$","$2\\pi\\sqrt{\\dfrac{R}{g}}$","$2\\pi\\sqrt{\\dfrac{g}{R}}$","$\\dfrac{1}{2\\pi}\\sqrt{\\dfrac{R}{g}}$"]},
+{n:12, text:"উষ্ণতা বৃদ্ধি করলে কোনটির রোধ কমে?", opts:["সিলিকন","তামা","লোহা","অ্যালুমিনিয়াম।"]},
+{n:13, text:"একটি ডাই ইলেকট্রিক ফলক একটি সমান্তরাল পাত ধারকের দুটি পাতের মধ্যে প্রবেশ করানো হল। যে রাশিটি অপরিবর্তিত থাকবে তা হল-", opts:["ধারকের আধান","ধারকের শক্তি","পাত দুটির মধ্যে বিভব পার্থক্য","ধারকের অভ্যন্তরে তড়িৎক্ষেত্র।"], single:true},
+{n:14, text:"নীচের হাইড্রোজেনের কোন বিকিরণ শ্রেণি দৃশ্যমান অঞ্চলে পড়ে?", opts:["লিম্যান","প্যাশেন","বামার","ফান্ড।"]},
+{n:15, text:"একটি পূর্ণচক্রে কোনো সাইন আকৃতির পরিবর্তী ভোল্টেজের গড় মান কত হবে? (সর্বোচ্চ মান $V_0$)", opts:["শূন্য","$\\dfrac{V_0}{\\sqrt{2}}$","$\\dfrac{2V_0}{\\pi}$","$\\dfrac{V_0}{2}$"]},
+{n:16, text:"${}^{27}_{13}\\text{Al}$ নিউক্লিয়াসের ব্যাসার্ধ 3.6 Fermi হলে, ${}^{125}_{52}\\text{Te}$ নিউক্লিয়াসের ব্যাসার্ধ-", opts:["5 Fermi","4 Fermi","8 Fermi","6 Fermi"]},
+{n:17, text:"$d_1$ ও $d_2$ ঘনত্বের দুটি পদার্থকে সম আয়তনে মেশানো হলে মিশ্রণটির ঘনত্ব হবে-", opts:["$\\frac{1}{2}(d_1 + d_2)$","$\\sqrt{d_1 d_2}$","$\\dfrac{d_1 d_2}{d_1 + d_2}$","$\\dfrac{2d_1 d_2}{d_1 + d_2}$"]},
+{n:18, text:"বিক্রিয়াটি সম্পূর্ণ করো: ${}_{0}n^{1} + {}_{92}U^{235} \\rightarrow {}_{56}Ba^{141} + \\_\\_\\_\\_ + 3\\,{}_{0}n^{1}$", opts:["${}_{36}Kr^{89}$","${}_{36}Kr^{90}$","${}_{36}Kr^{91}$","${}_{36}Kr^{92}$"]},
+{n:19, text:"2 kg এবং 4 kg ভরের দুটি বস্তুর উপর একই বল একই সময় ধরে প্রযুক্ত হলে-", opts:["উভয় বস্তুর ভরবেগের পরিবর্তন সমান হয়","উভয় বস্তুর গতিশক্তির পরিবর্তন সমান হয়","উভয় বস্তুর বেগের পরিবর্তন সমান হয়","2 kg ভরের বস্তুর ভরবেগের পরিবর্তন বেশি হয়।"], single:true},
+{n:20, text:"রকেট যে সংরক্ষণ নীতির উপর ভিত্তি করে কাজ করে তা হল-", opts:["ভরের সংরক্ষণ","রৈখিক ভরবেগের সংরক্ষণ","কৌণিক ভরবেগের সংরক্ষণ","শক্তির সংরক্ষণ।"], single:true},
+{n:21, text:"60V-12W বাতিকে 220V DC বিভবপ্রভেদের সঙ্গে সংযুক্ত করতে হবে যাতে এটি পূর্ণভাবে জ্বলতে পারে। বাতিটির সঙ্গে যে রোধ সংযুক্ত করতে হবে-", opts:["$40\\;\\Omega$","$60\\;\\Omega$","$80\\;\\Omega$","$100\\;\\Omega$"]},
+{n:22, text:"যে ঘটনাটি আলোর তরঙ্গ মতবাদ দ্বারা ব্যাখ্যা করা যায় না তা হল-", opts:["ব্যতিচার","অপবর্তন","সমবর্তন","আলোকতড়িৎ ক্রিয়া।"]},
+{n:23, text:"পৃষ্ঠটানাঙ্কের মাত্রা হল-", opts:["$[M^0 L T^{-2}]$","$[M L T^{-2}]$","$[M L^{-1} T^{-2}]$","$[M L^0 T^{-2}]$"]},
+{n:24, text:"যদি একটি তারকে টেনে ব্যাসার্ধকে $\\frac{r}{2}$ করা হয় তাহলে তার রোধ হবে-", opts:["16 R","4 R","2 R","0"]},
+{n:25, text:"একটি স্কেল দিয়ে একটি বর্গক্ষেত্রের কর্ণ মেপে তার ক্ষেত্রফল নির্ণয় করা হল। ত্রুটি ছিল 0.5%। ক্ষেত্রফল পরিমাপের ত্রুটি কত?", opts:["1%","0.05%","0.5%","0.25%"]},
+{n:26, text:"প্রদত্ত পদার্থগুলির মধ্যে কোনটি প্রতিচৌম্বক?", opts:["অ্যালুমিনিয়াম","কোয়ার্জ","নিকেল","বিসমাথ।"]},
+{n:27, text:"$S = a + bt + ct^2$ সমীকরণে S-এর একক মিটার এবং t-এর একক সেকেন্ড। c-এর একক হবে-", opts:["মিটার","সেকেন্ড","মিটার/সেকেন্ড","মিটার/সেকেন্ড$^2$"]},
+{n:28, text:"একটি বিন্দুতে তড়িৎবিভব $V = -5x + 3y + \\sqrt{15}\\, z$ ঐ বিন্দুতে তড়িৎপ্রাবল্য-", opts:["$3\\sqrt{2}$","$4\\sqrt{2}$","$5\\sqrt{2}$","$7$"]},
+{n:29, text:"যদি একটি তামার তারের মধ্য দিয়ে 1 mA বিদ্যুৎ প্রবাহিত হয় তাহলে প্রতি সেকেন্ডে কতগুলি ইলেকট্রন প্রবাহিত হবে?", opts:["$6.25 \\times 10^{16}$","$6.25 \\times 10^{15}$","$6.25 \\times 10^{19}$","$6.25 \\times 10^{21}$"]},
+{n:30, text:"গ্যাস মাধ্যমে শব্দের বেগ সংক্রান্ত ল্যাপ্লাসের সমীকরণটি হল-", opts:["$V = \\gamma\\sqrt{\\dfrac{P}{\\rho}}$","$V = \\sqrt{\\dfrac{\\gamma P}{\\rho}}$","$V = \\sqrt{\\dfrac{P}{\\rho \\gamma}}$","$V = \\sqrt{\\dfrac{\\gamma \\rho}{P}}$"]},
+{n:31, text:"বলের ঘাতের একক যে ভৌত রাশির একককের সঙ্গে অভিন্ন তা হল-", opts:["কার্য","ভরবেগ","ক্ষমতা","গতিবেগ।"]},
+{n:32, text:"মুক্ত ইলেকট্রনের সংখ্যা ঘনত্ব (n)-এর সহিত ইলেকট্রনগুলির বিচলন বেগ ($v_d$)-এর সম্পর্ক-", opts:["$v_d \\propto n$","$v_d \\propto \\dfrac{1}{n}$","$v_d \\propto \\dfrac{1}{n^2}$","$v_d \\propto n^2$"]},
+{n:33, text:"নিম্নলিখিত কোন রাশিটি পরিমাপে হুইটস্টোন ব্রিজ ব্যবহৃত হয়?", opts:["তড়িৎচালক বল","বিভবপ্রভেদ","রোধ","প্রবাহমাত্রা।"]},
+{n:34, text:"যদি হয়, $|\\vec{A} \\times \\vec{B}| = |\\vec{A} \\cdot \\vec{B}|$ তাহলে $\\vec{A}$ এবং $\\vec{B}$-এর মধ্যে কোণ হবে-", opts:["$30°$","$45°$","$60°$","$90°$"]},
+{n:35, text:"কাচের প্রতিসরাঙ্ক $(\\mu_g) = \\frac{3}{2}$ ও জলের প্রতিসরাঙ্ক $(\\mu_w) = \\frac{4}{3}$। কাচ ও জলের সংকট কোণ-", opts:["$45°$","$\\sin^{-1}\\dfrac{4}{3}$","$\\sin^{-1}\\dfrac{2}{3}$","$\\sin^{-1}\\left(\\dfrac{8}{9}\\right)$"]},
+{n:36, text:"আলোক উৎস অসীম দূরত্বে থাকলে, তরঙ্গমুখের আকার হয়-", opts:["গোলীয়","চোঙাকৃতি","উপবৃত্তাকার","সমতলীয়"]},
+{n:37, text:"কোনো স্থানে ভূ-চৌম্বকক্ষেত্রের উল্লম্ব উপাংশ শূন্য হলে সেখানে বিনতি কোণ-", opts:["$0°$","$45°$","$60°$","$90°$"]},
+{n:38, text:"m ভরের একটি অবাধে পতনশীল বস্তু t-তম সেকেন্ডে যে পরিমাণ স্থিতিশক্তি হারায় তার পরিমাণ-", opts:["$\\frac{1}{2}mgt^2$","$\\frac{1}{2}mg(t+1)^2$","$\\frac{1}{2}mg^2(t-1)$","$\\frac{1}{2}mg^2(2t-1)$"]},
+{n:39, text:"একটি 1.5 V তড়িৎচালক বলের কোশ থেকে সরাসরি একটি $0.042\\;\\Omega$ রোধবিশিষ্ট অ্যামিটারে 15A তড়িৎ প্রবাহিত হয়। কোশটির অভ্যন্তরীণ রোধ-", opts:["$0.04\\;\\Omega$","$0.06\\;\\Omega$","$0.10\\;\\Omega$","$10\\;\\Omega$"]},
+{n:40, text:"আলোক-তড়িৎ ক্রিয়া যে বিষয়টি তুলে ধরে, তা হল-", opts:["ইলেকট্রনের তরঙ্গ ধর্ম","আলোর তরঙ্গ ধর্ম","আলোর কণিকা ধর্ম","আলোর তড়িৎ আধান।"]},
+{n:41, text:"ঘাত বৃদ্ধির নীতিটি পাওয়া যায় যে সূত্র থেকে-", opts:["নিউটনের মহাকর্ষ সূত্র","পাস্কালের সূত্র","আর্কিমিডিসের সূত্র","বার্নৌলির সূত্র"]},
+{n:42, text:"আলোক-তড়িৎ ক্রিয়ার জন্য একটি সূচনা কম্পাঙ্ক $10^{15}$ Hz। $h = 6.4 \\times 10^{-34}$ Js ধরে ধাতুটির কার্য অপেক্ষক হল-", opts:["2.0 eV","3.0 eV","4.0 eV","4.5 eV"]},
+{n:43, text:"RT-এর মাত্রীয় সংকেত যে ভৌত রাশির মাত্রীয় সংকেতের সমান তা হল-", opts:["শক্তি","বল","আপেক্ষিক তাপ","লীনতাপ"]},
+{n:44, text:"$x = A \\sin \\omega t + B \\cos \\omega t$ দ্বারা প্রকাশিত সরল দোলগতির প্রারম্ভিক দশা হল-", opts:["$\\dfrac{A}{B}$","$\\dfrac{B}{A}$","$\\tan^{-1}\\dfrac{A}{B}$","$\\tan^{-1}\\dfrac{B}{A}$"]},
+{n:45, text:"ভর অপরিবর্তিত রেখে পৃথিবীর ব্যাসার্ধ 1% কমলে পৃথিবীপৃষ্ঠে অভিকর্ষজ ত্বরণের মান-", opts:["2% বাড়বে","1% বাড়বে","2% কমবে","একই থাকবে"]},
+{n:46, text:"একটি হাইড্রোজেন পরমাণুর ইলেকট্রনের প্রথম বোর কক্ষপথে শক্তি $-13.6$ eV হলে, তৃতীয় বোর কক্ষপথের শক্তি-", opts:["$-1.51$ eV","$-3.4$ eV","$0.85$ eV","$1.22$ eV"]},
+{n:47, text:"নীচের কোনটি সংরক্ষী বল নয়?", opts:["ঘর্ষণ বল","মহাকর্ষ বল","তড়িৎ বল","চৌম্বক বল"]},
+{n:48, text:"দুটি সমচিত্র আধানের মধ্যেকার দূরত্ব হ্রাস করা হল। স্থির তাড়িতিক স্থিতিশক্তির পরিমাণ-", opts:["অপরিবর্তিত থাকবে","হ্রাস পাবে","বৃদ্ধি পাবে","বলা সম্ভব নয়"]},
+{n:49, text:"স্থির ভরবেগসম্পন্ন কোনো বস্তুর ক্ষেত্রে যে রাশিটি স্থির থাকে তা হল-", opts:["ত্বরণ","বেগ","দ্রুতি","বল"]},
+{n:50, text:"M kg ভরের একটি ক্রিকেট বল $u\\;\\text{ms}^{-1}$ বেগে লম্বভাবে ব্যাটে আঘাত করে $v\\;\\text{ms}^{-1}$ বেগে বিপরীত দিকে প্রতিক্ষিপ্ত হয়। ঘাতের মান-", opts:["$M(u + v)$ N·s","$Muv$ N·s","$M(u - v)$ N·s","$M(v - u)$ N·s"]},
+{n:51, text:"একটি বস্তু একটি সমতল দর্পণে প্রতিবিম্ব সৃষ্টি করল। দর্পণটি $a$ ত্বরণে পিছনে সরে গেলে প্রতিবিম্বটি-", opts:["$2a$ ত্বরণে পিছনে সরে যাবে","$a$ ত্বরণে পিছনে সরে যাবে","$2a$ ত্বরণে বস্তুটির দিকে এগিয়ে আসবে","$a$ ত্বরণে বস্তুটির দিকে এগিয়ে আসবে"], single:true},
+{n:52, text:"একটি সরল অণুবীক্ষণ যন্ত্রের বিবর্ধনের রাশিমালা-", opts:["$m = 1 + \\dfrac{f}{D}$","$m = \\dfrac{v}{u}$","$m = \\dfrac{u}{v}$","$m = 1 + \\dfrac{D}{f}$"]},
+{n:53, text:"একটি বল $F$ একটি সংরক্ষী পথ S-এ কার্যরত। একটি অসংরক্ষী পথ S'-এ বলটি-", opts:["অসংরক্ষী","সংরক্ষী","পথের উপর নির্ভরশীল","নির্দিষ্টভাবে বলা সম্ভব নয়।"]},
+{n:54, text:"একটি ডায়ালাইসিস মেমব্রেনের মধ্য দিয়ে কোন ধরনের কণা যেতে পারে না?", opts:["কলয়েড কণা","আয়ন","অণু","দ্রাবক অণু"]},
+{n:55, text:"একটি আদর্শ গ্যাসের অভ্যন্তরীণ শক্তি নির্ভর করে-", opts:["শুধুমাত্র উষ্ণতার উপর","শুধুমাত্র আয়তনের উপর","চাপ ও আয়তনের উপর","উষ্ণতা, চাপ ও আয়তনের উপর"]}
+];
+
+const SECTIONS = [
+    {title:"বিভাগ — ক", badge:"PHYSICS · SECTION A", start:1, end:15},
+    {title:"বিভাগ — খ", badge:"PHYSICS · SECTION B", start:16, end:17},
+    {title:"বিভাগ — গ", badge:"PHYSICS · SECTION C", start:18, end:26},
+    {title:"বিভাগ — ঘ", badge:"PHYSICS · SECTION D", start:27, end:35},
+    {title:"বিভাগ — ঙ", badge:"PHYSICS · SECTION E", start:36, end:44},
+    {title:"বিভাগ — চ", badge:"PHYSICS · SECTION F", start:45, end:55}
+];
+
+let timerInterval = null;
+let timeLeft = 90 * 60;
+let studentName = '';
+
+// ===== THEME TOGGLE =====
+function toggleTheme() {
+    const body = document.body;
+    const btn = document.getElementById('themeToggle');
+    if (body.getAttribute('data-theme') === 'dark') {
+        body.setAttribute('data-theme', 'light');
+        btn.textContent = '☀️';
+        localStorage.setItem('exam_theme', 'light');
+    } else {
+        body.setAttribute('data-theme', 'dark');
+        btn.textContent = '🌙';
+        localStorage.setItem('exam_theme', 'dark');
+    }
+}
+
+function loadTheme() {
+    const saved = localStorage.getItem('exam_theme');
+    if (saved === 'light') {
+        document.body.setAttribute('data-theme', 'light');
+        document.getElementById('themeToggle').textContent = '☀️';
+    }
+}
+
+// ===== CHECK ATTEMPTED =====
+function checkAttempted() {
+    const data = localStorage.getItem(EXAM_KEY);
+    if (data) {
+        const p = JSON.parse(data);
+        document.getElementById('reg-form').style.display = 'none';
+        studentName = p.name;
+        document.getElementById('reg-screen').style.display = 'none';
+        document.getElementById('exam-screen').style.display = 'none';
+        document.getElementById('result-screen').style.display = 'block';
+        
+        renderResultScreen(p.name, p.score, p.correct, p.wrong, p.skipped, p.percentage, p.timeTaken, p.results || [], true);
+        fetchLeaderboard();
+        return true;
+    }
+    return false;
+}
+
+// ===== START EXAM =====
+function startExam() {
+    const name = document.getElementById('studentName').value.trim();
+    if (!name) { 
+        alert('অনুগ্রহ করে নিজের নাম লিখুন।'); 
+        return; 
+    }
+    studentName = name;
+    
+    // Initialize & Play Click Sound
+    SoundFX.init();
+    SoundFX.playClick();
+    
+    document.getElementById('reg-screen').style.display = 'none';
+    document.getElementById('exam-screen').style.display = 'block';
+    document.getElementById('avatar').textContent = name.charAt(0).toUpperCase();
+    document.getElementById('displayName').textContent = name;
+    buildQuestions();
+    startTimer();
+    if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
+}
+
+// ===== BUILD QUESTIONS =====
+function buildQuestions() {
+    const c = document.getElementById('qContainer');
+    let html = ''; 
+    let qi = 0;
+    SECTIONS.forEach(sec => {
+        html += `<div class="sec-header"><h2>${sec.title}</h2><div class="sec-badge">${sec.badge}</div></div>`;
+        for (let i = sec.start; i <= sec.end; i++) {
+            const q = QUESTIONS[qi];
+            const sc = q.single ? ' single-col' : '';
+            html += `<div class="q-block" id="qb-${q.n}">
+                <div class="q-stem">
+                    <span class="q-num gradient-bg">${q.n}</span>
+                    <span class="q-text">${q.text}</span>
+                </div>
+                <div class="opts-grid${sc}">`;
+            q.opts.forEach((opt, oi) => {
+                html += `
+                <label class="opt-label" id="ol-${q.n}-${oi}" onclick="selectOpt(${q.n},${oi})">
+                    <input type="radio" name="q${q.n}" value="${oi}">
+                    <span class="radio-dot"></span>
+                    <span class="opt-letter">${OPT_LETTERS[oi]}</span>
+                    <span class="opt-content">${opt}</span>
+                </label>`;
+            });
+            html += '</div></div>';
+            qi++;
+        }
+    });
+    c.innerHTML = html;
+}
+
+// ===== SELECT OPTION =====
+function selectOpt(qn, oi) {
+    SoundFX.playClick(); // Play physical click tone
+    for (let i = 0; i < 4; i++) { 
+        const e = document.getElementById(`ol-${qn}-${i}`); 
+        if(e) e.classList.remove('selected'); 
+    }
+    const sel = document.getElementById(`ol-${qn}-${oi}`);
+    if (sel) { 
+        sel.classList.add('selected'); 
+        sel.querySelector('input').checked = true; 
+    }
+    const blk = document.getElementById(`qb-${qn}`); 
+    if(blk) blk.classList.add('answered');
+    updateProgress();
+}
+
+function updateProgress() {
+    let ans = 0;
+    QUESTIONS.forEach(q => { 
+        if (document.querySelector(`input[name="q${q.n}"]:checked`)) ans++; 
+    });
+    const pct = Math.round((ans / 55) * 100);
+    document.getElementById('answeredCount').textContent = `উত্তর: ${ans} / 55`;
+    document.getElementById('progressPct').textContent = pct + '%';
+    document.getElementById('progressFill').style.width = pct + '%';
+}
+
+// ===== TIMER =====
+function startTimer() {
+    updateTimerDisplay();
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 0) { 
+            clearInterval(timerInterval); 
+            timeLeft = 0; 
+            updateTimerDisplay(); 
+            alert('⏰ সময় শেষ! পরীক্ষা স্বয়ংক্রিয়ভাবে জমা হচ্ছে।'); 
+            submitExam(); 
+            return; 
+        }
+        updateTimerDisplay();
+        const box = document.getElementById('timerBox');
+        if (timeLeft <= 300) { 
+            box.classList.add('danger'); 
+            box.classList.remove('warn'); 
+            SoundFX.playTick(); // Tick sound every second when < 5 mins left
+        } else if (timeLeft <= 900) { 
+            box.classList.add('warn'); 
+            box.classList.remove('danger'); 
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerDisplay').textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+}
+
+// ===== MODAL =====
+function showModal() {
+    let un = 0;
+    QUESTIONS.forEach(q => { 
+        if (!document.querySelector(`input[name="q${q.n}"]:checked`)) un++; 
+    });
+    const w = document.getElementById('unansweredWarn');
+    if (un > 0) { 
+        w.style.display = 'block'; 
+        w.textContent = `⚠️ ${un}টি প্রশ্নের উত্তর দেওয়া হয়নি!`; 
+    } else { 
+        w.style.display = 'none'; 
+    }
+    document.getElementById('confirmModal').classList.add('show');
+}
+function hideModal() { 
+    document.getElementById('confirmModal').classList.remove('show'); 
+}
+
+// ===== SUBMIT EXAM =====
+function submitExam() {
+    hideModal();
+    clearInterval(timerInterval);
+    const name = studentName;
+    let correct = 0, wrong = 0, skipped = 0;
+    const results = [];
+
+    QUESTIONS.forEach((q, idx) => {
+        const sel = document.querySelector(`input[name="q${q.n}"]:checked`);
+        const correctAns = ANSWER_KEY[idx];
+        let status, studentAns;
+        if (!sel) { 
+            status = 'skipped'; 
+            studentAns = -1; 
+            skipped++; 
+        } else {
+            studentAns = parseInt(sel.value);
+            if (studentAns === correctAns) { 
+                status = 'correct'; 
+                correct++; 
+            } else { 
+                status = 'wrong'; 
+                wrong++; 
+            }
+        }
+        results.push({ q, idx, status, studentAns, correctAns });
+    });
+
+    const rawScore = correct - (wrong * 0.25);
+    const score = parseFloat(rawScore.toFixed(2));
+    const percentage = parseFloat(((Math.max(0, score) / 55) * 100).toFixed(1));
+    const timeTaken = 90*60 - timeLeft;
+    const tmMin = Math.floor(timeTaken / 60);
+    const tmSec = timeTaken % 60;
+    const timeStr = `${tmMin}m ${tmSec}s`;
+
+    // Save locally
+    localStorage.setItem(EXAM_KEY, JSON.stringify({ name, score, total: 55, correct, wrong, skipped, percentage, date: new Date().toLocaleString('bn-IN'), timeTaken: timeStr, results }));
+
+    document.getElementById('exam-screen').style.display = 'none';
+    document.getElementById('result-screen').style.display = 'block';
+
+    renderResultScreen(name, score, correct, wrong, skipped, percentage, timeStr, results, false);
+
+    // Send to Google Sheets via Hybrid Submit (Fetch + JSONP Fallback)
+    let submitted = false;
+    function handleSuccess() {
+        if (submitted) return;
+        submitted = true;
+        console.log('Exam result successfully recorded!');
+        fetchLeaderboard(); // Load leaderboard after success!
+    }
+
+    const submitParams = `?action=submit&name=${encodeURIComponent(name)}&score=${score}&total=55&correct=${correct}&wrong=${wrong}&skipped=${skipped}&percentage=${percentage}&timeTaken=${encodeURIComponent(timeStr)}`;
+    const submitUrl = SCRIPT_URL + submitParams;
+
+    console.log('Attempting submit via fetch()...');
+    fetch(submitUrl, {
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'omit'
+    })
+    .then(res => {
+        if (!res.ok) throw new Error('HTTP status ' + res.status);
+        return res.json();
+    })
+    .then(data => {
+        console.log('Submitted successfully via fetch()');
+        handleSuccess();
+    })
+    .catch(err => {
+        console.warn('fetch() submit failed, falling back to JSONP: ', err);
+        
+        const cb = 'submitCallback_' + Date.now();
+        window[cb] = function(res) {
+            console.log('Submitted successfully via JSONP');
+            handleSuccess();
+            delete window[cb];
+        };
+
+        const script = document.createElement('script');
+        script.src = submitUrl + '&callback=' + cb;
+        script.onerror = function() {
+            console.error('JSONP submit script load failed.');
+            fetchLeaderboard(); // Proceed to leaderboard even if save fails
+        };
+        document.body.appendChild(script);
+    });
+}
+
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    
+    // Set active button
+    const btn = Array.from(document.querySelectorAll('.tab-btn')).find(b => b.getAttribute('onclick').includes(tabId));
+    if (btn) btn.classList.add('active');
+    
+    document.getElementById(tabId).classList.add('active');
+}
+
+function renderResultScreen(name, score, correct, wrong, skipped, percentage, timeStr, results, isReattempt = false) {
+    let emoji = '🎯', remark = 'চমৎকার!';
+    if (percentage >= 80) { emoji = '🏆'; remark = 'অসাধারণ! চমৎকার পারফরম্যান্স!'; }
+    else if (percentage >= 60) { emoji = '👏'; remark = 'ভালো করেছো! আরও চেষ্টা করো!'; }
+    else if (percentage >= 40) { emoji = '💪'; remark = 'মোটামুটি। আরও অনুশীলন দরকার।'; }
+    else { emoji = '📚'; remark = 'আরও অনেক পড়াশোনা দরকার।'; }
+
+    const scoreDisplay = score % 1 === 0 ? score : score.toFixed(2);
+    const deducted = parseFloat((wrong * 0.25).toFixed(2));
+
+    let html = '';
+    if (isReattempt) {
+        html += `
+        <div class="lock-screen-box">
+            <div class="lock-logo-container">
+                <div class="lock-logo-wrapper">
+                    <span class="lock-logo-big">🔒</span>
+                </div>
+            </div>
+            <h2>পরীক্ষা লক করা হয়েছে!</h2>
+            <p class="lock-desc">আপনি ইতিমধ্যে এই পরীক্ষাটি সম্পন্ন করেছেন। পুনরায় পরীক্ষা দেওয়া সম্ভব নয়। আপনার পূর্বের ফলাফল নিচে মার্কশিটে দেওয়া হলো।</p>
+            
+            <div class="podium-title">🏆 শীর্ষ ৩ জন পরীক্ষার্থী (Top 3)</div>
+            <div class="podium-wrapper" id="podiumWrapper">
+                <p style="color:var(--text-muted); font-size:13px; margin: 10px 0;">শীর্ষ ৩ লোড হচ্ছে...</p>
+            </div>
+            <p class="podium-hint">💡 অন্যান্য সবার বিস্তারিত র্যাংকিং দেখতে নিচে <strong>"লিডারবোর্ড"</strong> ট্যাবে ক্লিক করুন।</p>
+        </div>`;
+        
+        // Play metallic locking sound
+        setTimeout(() => { SoundFX.playLock(); }, 300);
+    } else {
+        // Play success chime sound
+        setTimeout(() => { SoundFX.playSuccess(); }, 300);
+    }
+
+    html += `
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="switchTab('tab-score')">📊 মার্কশিট</button>
+        <button class="tab-btn" onclick="switchTab('tab-leaderboard')">🏆 লিডারবোর্ড</button>
+        <button class="tab-btn" onclick="switchTab('tab-answers')">📝 আপনার উত্তর</button>
+        <button class="tab-btn" onclick="switchTab('tab-official')">📖 অফিশিয়াল সমাধান</button>
+    </div>
+
+    <div id="tab-score" class="tab-content active">
+        <div class="result-hero">
+            <div class="score-circle">
+                <span class="score-big gradient-text">${scoreDisplay}</span>
+                <span class="score-of">/ 55</span>
+            </div>
+            <h2>${emoji} ${remark}</h2>
+            <p class="detail"><strong>${name}</strong> | সময়: ${timeStr}</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card correct"><div class="s-icon">✅</div><div class="s-val">${correct}</div><div class="s-lbl">সঠিক</div></div>
+            <div class="stat-card wrong"><div class="s-icon">❌</div><div class="s-val">${wrong}</div><div class="s-lbl">ভুল</div></div>
+            <div class="stat-card skipped"><div class="s-icon">⏭️</div><div class="s-val">${skipped}</div><div class="s-lbl">বাদ</div></div>
+            <div class="stat-card score"><div class="s-icon">📊</div><div class="s-val">${scoreDisplay}</div><div class="s-lbl">মোট নম্বর</div></div>
+            <div class="stat-card pct"><div class="s-icon">📈</div><div class="s-val">${percentage}%</div><div class="s-lbl">শতাংশ</div></div>
+        </div>
+
+        <div class="neg-info">⚠️ নেগেটিভ মার্কিং: ${wrong}টি ভুল × ০.২৫ = <strong>-${deducted}</strong> নম্বর কাটা হয়েছে। (${correct} - ${deducted} = ${scoreDisplay})</div>
+        <div class="result-footer" style="margin-top:20px;"><p>JENPAS (UG) Physics Mock Test • Test Exam 1 • ${new Date().toLocaleDateString('bn-IN')}</p></div>
+    </div>
+
+    <div id="tab-leaderboard" class="tab-content">
+        <div class="lb-section" id="leaderboardContainer" style="margin-top:0;">
+            <h3>🏆 লাইভ লিডারবোর্ড লোড হচ্ছে...</h3>
+        </div>
+    </div>
+
+    <div id="tab-answers" class="tab-content">
+        <div class="review-header" style="margin-top:0;"><h3>📝 আপনার দেওয়া উত্তরপত্র</h3></div>
+        <div id="studentAnswersContainer"></div>
+    </div>
+
+    <div id="tab-official" class="tab-content">
+        <div class="review-header" style="margin-top:0;"><h3>📖 অফিশিয়াল বিস্তারিত সমাধান</h3></div>
+        <div id="officialAnswersContainer"></div>
+    </div>
+    `;
+
+    document.getElementById('resultBox').innerHTML = html;
+
+    // Render Student Answers
+    let ansHtml = '';
+    if(results && results.length > 0) {
+        results.forEach(r => {
+            const sc = r.status === 'correct' ? 'is-correct' : (r.status === 'wrong' ? 'is-wrong' : 'is-skipped');
+            let tags = '';
+            if (r.status === 'correct') {
+                tags = `<span class="rev-tag right-tag">আপনার উত্তর: ${OPT_LETTERS[r.studentAns]} ✓</span>`;
+            } else if (r.status === 'wrong') {
+                tags = `<span class="rev-tag wrong-tag">আপনার উত্তর: ${OPT_LETTERS[r.studentAns]}</span><span class="rev-tag correct-tag">সঠিক উত্তর: ${OPT_LETTERS[r.correctAns]}</span>`;
+            } else {
+                tags = `<span class="rev-tag skip-tag">উত্তর দেওয়া হয়নি</span><span class="rev-tag correct-tag">সঠিক উত্তর: ${OPT_LETTERS[r.correctAns]}</span>`;
+            }
+            ansHtml += `<div class="rev-block ${sc}"><div class="rev-stem"><span class="rev-num">${r.q.n}</span><span class="rev-q-text">${r.q.text}</span></div><div class="rev-tags">${tags}</div></div>`;
+        });
+    } else {
+        ansHtml = '<p style="text-align:center; padding:20px; color:var(--text-secondary);">উত্তরের তথ্য পাওয়া যায়নি।</p>';
+    }
+    document.getElementById('studentAnswersContainer').innerHTML = ansHtml;
+
+    // Render Official Answers
+    let offHtml = '';
+    QUESTIONS.forEach((q, i) => {
+        offHtml += `<div class="rev-block is-correct" style="border-left-color:var(--accent-blue); background:rgba(59,130,246,0.05); margin-bottom:20px; padding:20px;">
+            <div class="rev-stem" style="border-bottom:1px solid var(--border-default); padding-bottom:12px; margin-bottom:12px;">
+                <span class="rev-num" style="background:var(--accent-blue);">${q.n}</span>
+                <span class="rev-q-text" style="font-size:16px;">${q.text}</span>
+            </div>
+            <div style="margin-bottom:12px;"><strong>সঠিক উত্তর:</strong> <span style="color:var(--text-primary); font-weight:600;">${OPT_LETTERS[ANSWER_KEY[i]]} ${q.opts[ANSWER_KEY[i]]}</span></div>
+            <div style="font-size:14.5px; color:var(--text-secondary); line-height:1.7;">
+                <strong style="color:var(--text-primary);">ব্যাখ্যা:</strong><br>${EXPLANATIONS[i] || 'এই প্রশ্নের বিস্তারিত ব্যাখ্যা উপলব্ধ নেই।'}
+            </div>
+        </div>`;
+    });
+    document.getElementById('officialAnswersContainer').innerHTML = offHtml;
+
+    if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([document.getElementById('tab-official'), document.getElementById('tab-answers')]);
+    }
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// ===== FETCH LEADERBOARD =====
+function fetchLeaderboard() {
+    const lc = document.getElementById('leaderboardContainer');
+    if (!lc) return;
+
+    // Show loading state
+    lc.innerHTML = '<h3>🏆 লাইভ লিডারবোর্ড লোড হচ্ছে...</h3>';
+
+    let loaded = false;
+
+    // Helper to render the leaderboard table
+    function renderLeaderboard(data) {
+        if (loaded) return;
+        loaded = true;
+
+        if (data && data.error) {
+            lc.innerHTML = `<p style="text-align:center;color:var(--accent-red);padding:20px;font-weight:600;">⚠️ ত্রুটি: ${data.error}</p>`;
+            return;
+        }
+
+        if (data && data.results && data.results.length > 0) {
+            let h = `<div style="overflow-x:auto;"><table class="lb-table"><thead><tr><th>Rank</th><th>নাম</th><th>Score</th><th>✅</th><th>❌</th><th>⏭️</th><th>সময়</th></tr></thead><tbody>`;
+            data.results.forEach((row, i) => {
+                let rc = '', rd = i + 1;
+                if (i === 0) { rc = 'rank-1'; rd = '🥇 1'; }
+                else if (i === 1) { rc = 'rank-2'; rd = '🥈 2'; }
+                else if (i === 2) { rc = 'rank-3'; rd = '🥉 3'; }
+                const isMe = row.name === studentName;
+                
+                const corrVal = row.correct !== undefined && row.correct !== null ? row.correct : '-';
+                const wrongVal = row.wrong !== undefined && row.wrong !== null ? row.wrong : '-';
+                const skipVal = row.skipped !== undefined && row.skipped !== null ? row.skipped : '-';
+
+                h += `<tr class="${isMe ? 'highlight-row' : ''}">
+                    <td class="${rc}">${rd}</td>
+                    <td>${row.name}${isMe ? ' ⭐' : ''}</td>
+                    <td style="font-weight:bold;color:var(--accent-cyan);">${row.score}</td>
+                    <td>${corrVal}</td>
+                    <td>${wrongVal}</td>
+                    <td>${skipVal}</td>
+                    <td>${row.timeTaken || '-'}</td>
+                </tr>`;
+            });
+            h += '</tbody></table></div>';
+            lc.innerHTML = h;
+        } else {
+            lc.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:20px;">এখনও কেউ পরীক্ষা দেয়নি।</p>';
+        }
+
+        // Render Top 3 Podium if element exists
+        const podiumWrapper = document.getElementById('podiumWrapper');
+        if (podiumWrapper && data && data.results) {
+            const top3 = data.results.slice(0, 3);
+            if (top3.length > 0) {
+                let phtml = '';
+                
+                // Silver (2nd)
+                if (top3[1]) {
+                    phtml += `
+                    <div class="podium-card silver">
+                        <span class="podium-badge">🥈</span>
+                        <span class="podium-name">${top3[1].name}</span>
+                        <span class="podium-score">${top3[1].score}</span>
+                    </div>`;
+                } else {
+                    phtml += `<div class="podium-card silver" style="opacity:0.3; height:90px;"><span class="podium-badge">🥈</span><span class="podium-name">-</span></div>`;
+                }
+
+                // Gold (1st)
+                if (top3[0]) {
+                    phtml += `
+                    <div class="podium-card gold">
+                        <span class="podium-badge">🥇</span>
+                        <span class="podium-name">${top3[0].name}</span>
+                        <span class="podium-score">${top3[0].score}</span>
+                    </div>`;
+                }
+
+                // Bronze (3rd)
+                if (top3[2]) {
+                    phtml += `
+                    <div class="podium-card bronze">
+                        <span class="podium-badge">🥉</span>
+                        <span class="podium-name">${top3[2].name}</span>
+                        <span class="podium-score">${top3[2].score}</span>
+                    </div>`;
+                } else {
+                    phtml += `<div class="podium-card bronze" style="opacity:0.3; height:90px;"><span class="podium-badge">🥉</span><span class="podium-name">-</span></div>`;
+                }
+                
+                podiumWrapper.innerHTML = phtml;
+            } else {
+                podiumWrapper.innerHTML = '<p style="color:var(--text-muted); font-size:13px;">এখনও কোনো ফলাফল নেই।</p>';
+            }
+        }
+    }
+
+    // Method 1: Try using standard fetch() with CORS
+    const fetchUrl = SCRIPT_URL + '?action=leaderboard';
+    console.log('Attempting fetch from: ', fetchUrl);
+    
+    fetch(fetchUrl, {
+        method: 'GET',
+        mode: 'cors',
+        credentials: 'omit'
+    })
+    .then(res => {
+        if (!res.ok) throw new Error('HTTP status ' + res.status);
+        return res.json();
+    })
+    .then(data => {
+        console.log('Leaderboard successfully loaded via fetch()');
+        renderLeaderboard(data);
+    })
+    .catch(err => {
+        console.warn('fetch() failed, falling back to JSONP: ', err);
+        
+        // Method 2: JSONP Fallback
+        const cb = 'lbCallback_' + Date.now();
+        window[cb] = function(data) {
+            console.log('Leaderboard successfully loaded via JSONP');
+            renderLeaderboard(data);
+            delete window[cb];
+        };
+
+        const script = document.createElement('script');
+        script.src = SCRIPT_URL + '?action=leaderboard&callback=' + cb;
+        script.onerror = function() {
+            console.error('JSONP script load failed.');
+            if (!loaded) {
+                lc.innerHTML = `
+                    <div style="text-align:center;padding:20px;">
+                        <p style="color:var(--accent-red);font-weight:600;margin-bottom:12px;">⚠️ লিডারবোর্ড লোড করা যায়নি।</p>
+                        <button class="tab-btn" onclick="fetchLeaderboard()" style="padding:6px 16px;font-size:12px;">🔄 আবার চেষ্টা করুন</button>
+                    </div>`;
+                const podiumWrapper = document.getElementById('podiumWrapper');
+                if (podiumWrapper) {
+                    podiumWrapper.innerHTML = `
+                        <div style="text-align:center; padding: 10px 0;">
+                            <p style="color:var(--accent-red); font-size:12px; margin-bottom:6px;">⚠️ লোড করা যায়নি</p>
+                            <button class="tab-btn" onclick="fetchLeaderboard()" style="padding:4px 10px;font-size:10px;">🔄 চেষ্টা করুন</button>
+                        </div>`;
+                }
+            }
+        };
+        document.body.appendChild(script);
+    });
+}
+
+// ===== INIT =====
+let lockSoundPlayed = false;
+
+function triggerLockSoundIfReattempt() {
+    if (localStorage.getItem(EXAM_KEY) && !lockSoundPlayed) {
+        SoundFX.playLock();
+        lockSoundPlayed = true;
+    }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    loadTheme();
+    const isAttempted = checkAttempted();
+    
+    // Resume audio context and play lock sound on first interaction if already attempted
+    if (isAttempted) {
+        const resumeAudio = () => {
+            SoundFX.init();
+            if (SoundFX.ctx) {
+                if (SoundFX.ctx.state === 'suspended') {
+                    SoundFX.ctx.resume().then(() => {
+                        triggerLockSoundIfReattempt();
+                    });
+                } else {
+                    triggerLockSoundIfReattempt();
+                }
+            }
+            // Remove listeners
+            document.removeEventListener('click', resumeAudio);
+            document.removeEventListener('touchstart', resumeAudio);
+        };
+        
+        document.addEventListener('click', resumeAudio);
+        document.addEventListener('touchstart', resumeAudio);
+    }
+});
+</script>
+</body>
+</html>

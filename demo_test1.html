@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo Practice — পরীক্ষা কীভাবে দেবেন</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --bg-primary: #0b0f19;
+  --bg-card: #141b2d;
+  --bg-option: #1a2240;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --border-default: #2a3352;
+  --accent-blue: #3b82f6;
+  --accent-purple: #8b5cf6;
+  --accent-pink: #ec4899;
+  --gradient-main: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+  --gradient-btn: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.35);
+  --shadow-option: 0 2px 8px rgba(0,0,0,0.2);
+  --correct-bg: rgba(34,197,94,0.15);
+  --correct-border: #22c55e;
+  --wrong-bg: rgba(239,68,68,0.12);
+  --wrong-border: #ef4444;
+  --transition-speed: 0.3s;
+}
+
+[data-theme="light"] {
+  --bg-primary: #f0f4f8;
+  --bg-card: #ffffff;
+  --bg-option: #f5f7fa;
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a5568;
+  --border-default: #e0e4ea;
+  --accent-blue: #3b82f6;
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-option: 0 2px 8px rgba(0,0,0,0.06);
+  --correct-bg: rgba(34,197,94,0.1);
+  --wrong-bg: rgba(239,68,68,0.08);
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ===== BACKGROUND DECORATIONS ===== */
+body::before {
+  content: '';
+  position: fixed;
+  top: -200px;
+  right: -200px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -150px;
+  left: -150px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(139,92,246,0.07) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== HEADER BAR ===== */
+.header-bar {
+  text-align: center;
+  padding: 20px 0 8px;
+  margin-bottom: 8px;
+}
+
+.header-bar .demo-badge {
+  display: inline-block;
+  background: var(--gradient-btn);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 18px;
+  border-radius: 50px;
+  margin-bottom: 10px;
+  animation: shimmer 2.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.03); }
+}
+
+/* ===== SCREEN MANAGEMENT ===== */
+.screen { display: none; }
+.screen.active { display: block; animation: fadeUp 0.5s ease; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== CARD ===== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: 16px;
+  padding: 32px 28px;
+  box-shadow: var(--shadow-card);
+  transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+/* ===== WELCOME SCREEN ===== */
+.welcome-icon {
+  font-size: 52px;
+  margin-bottom: 8px;
+  display: block;
+  text-align: center;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.welcome-title {
+  font-size: 28px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 6px;
+  background: var(--gradient-main);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.welcome-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14.5px;
+  line-height: 1.8;
+  margin-bottom: 22px;
+  padding: 0 8px;
+}
+
+/* Info pills */
+.info-pills {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-option);
+  border: 1px solid var(--border-default);
+  border-radius: 50px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+.pill .pill-icon { font-size: 15px; }
+
+/* Name input */
+.input-group {
+  margin-bottom: 24px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1.5px solid var(--border-default);
+  border-radius: 12px;
+  background: var(--bg-option);
+  color: var(--text-primary);
+  font-size: 16px;
+  font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.input-group input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.input-group input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+}
+
+/* Primary button */
+.btn-primary {
+  width: 100%;
+  padding: 15px 24px;
+  border: none;
+  border-radius: 12px;
+  background: var(--gradient-btn);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 4px 20px rgba(59,130,246,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(59,130,246,0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ===== QUESTION SCREEN ===== */
+.questions-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.questions-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.questions-header p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.question-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: 16px;
+  padding: 24px 22px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-card);
+  animation: fadeUp 0.45s ease both;
+  transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+.question-card:nth-child(1) { animation-delay: 0.05s; }
+.question-card:nth-child(2) { animation-delay: 0.1s; }
+.question-card:nth-child(3) { animation-delay: 0.15s; }
+.question-card:nth-child(4) { animation-delay: 0.2s; }
+.question-card:nth-child(5) { animation-delay: 0.25s; }
+
+.q-number {
+  display: inline-block;
+  background: var(--gradient-btn);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 50px;
+  margin-bottom: 12px;
+}
+
+.q-text {
+  font-size: 16.5px;
+  font-weight: 600;
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+/* Option cards */
+.options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  border: 1.5px solid var(--border-default);
+  border-radius: 12px;
+  background: var(--bg-option);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+}
+
+.option-label:hover {
+  border-color: var(--accent-blue);
+  background: rgba(59,130,246,0.06);
+}
+
+.option-label input[type="radio"] {
+  display: none;
+}
+
+.option-radio {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border: 2px solid var(--border-default);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.option-radio::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  transform: scale(0);
+  transition: transform 0.2s ease;
+}
+
+.option-label.selected {
+  border-color: var(--accent-blue);
+  background: rgba(59,130,246,0.1);
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.12);
+}
+
+.option-label.selected .option-radio {
+  border-color: var(--accent-blue);
+}
+
+.option-label.selected .option-radio::after {
+  transform: scale(1);
+}
+
+.option-letter {
+  font-weight: 700;
+  color: var(--text-secondary);
+  min-width: 14px;
+}
+
+/* Submit section */
+.submit-section {
+  margin-top: 12px;
+  padding-top: 8px;
+}
+
+.submit-section .btn-primary {
+  font-size: 18px;
+}
+
+.unanswered-warning {
+  text-align: center;
+  color: #f59e0b;
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ===== RESULT SCREEN ===== */
+.result-hero {
+  text-align: center;
+  padding: 36px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-main);
+}
+
+.result-emoji {
+  font-size: 56px;
+  display: block;
+  margin-bottom: 10px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.result-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.result-name {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.score-circle {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: var(--gradient-btn);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 6px 30px rgba(59,130,246,0.3);
+  animation: popIn 0.5s ease 0.2s both;
+}
+
+@keyframes popIn {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.score-circle .score-num {
+  font-size: 40px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.score-circle .score-of {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  font-weight: 600;
+}
+
+.score-stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 6px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.stat-item .stat-icon { font-size: 18px; }
+.stat-correct { color: #22c55e; }
+.stat-wrong { color: #ef4444; }
+
+/* Review cards */
+.review-section {
+  margin-top: 8px;
+}
+
+.review-section h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.review-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-card);
+  animation: fadeUp 0.4s ease both;
+  transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+.review-card:nth-child(2) { animation-delay: 0.06s; }
+.review-card:nth-child(3) { animation-delay: 0.12s; }
+.review-card:nth-child(4) { animation-delay: 0.18s; }
+.review-card:nth-child(5) { animation-delay: 0.24s; }
+.review-card:nth-child(6) { animation-delay: 0.30s; }
+
+.review-card.correct {
+  border-left: 4px solid var(--correct-border);
+  background: var(--correct-bg);
+}
+
+.review-card.wrong {
+  border-left: 4px solid var(--wrong-border);
+  background: var(--wrong-bg);
+}
+
+.review-q-num {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.review-q-text {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.review-answers {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.review-answer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+.review-answer .ra-icon { font-size: 16px; }
+.review-answer .ra-label {
+  color: var(--text-secondary);
+  min-width: 90px;
+  font-weight: 600;
+}
+.review-answer .ra-value { font-weight: 600; }
+.ra-correct { color: #22c55e; }
+.ra-wrong { color: #ef4444; }
+
+/* CTA Button */
+.cta-section {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.btn-cta {
+  display: inline-block;
+  padding: 18px 40px;
+  border: none;
+  border-radius: 16px;
+  background: var(--gradient-btn);
+  background-size: 200% 200%;
+  color: #fff;
+  font-size: 19px;
+  font-weight: 700;
+  font-family: 'Noto Sans Bengali', 'Inter', sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 6px 30px rgba(59,130,246,0.35);
+  animation: pulse 2s ease-in-out infinite, gradientShift 3s ease infinite;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-cta::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%);
+  animation: ctaSweep 2.5s ease-in-out infinite;
+}
+
+@keyframes ctaSweep {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.btn-cta:hover {
+  transform: scale(1.06);
+  box-shadow: 0 8px 40px rgba(59,130,246,0.5);
+}
+
+.cta-hint {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ===== THEME TOGGLE ===== */
+.theme-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 50px;
+  height: 50px;
+  border: 1.5px solid var(--border-default);
+  border-radius: 50%;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-card);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  border-color: var(--accent-blue);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 24px 0 16px;
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  opacity: 0.6;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 520px) {
+  .container { padding: 16px 12px 90px; }
+  .card { padding: 24px 18px; }
+  .welcome-title { font-size: 24px; }
+  .q-text { font-size: 15.5px; }
+  .option-label { padding: 11px 14px; font-size: 14px; }
+  .score-circle { width: 110px; height: 110px; }
+  .score-circle .score-num { font-size: 34px; }
+  .btn-cta { padding: 16px 28px; font-size: 17px; }
+  .result-hero { padding: 28px 18px; }
+  .info-pills { gap: 8px; }
+  .pill { padding: 6px 12px; font-size: 12px; }
+  .theme-toggle { width: 44px; height: 44px; font-size: 20px; bottom: 20px; right: 16px; }
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border-default); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-blue); }
+
+/* Selection */
+::selection {
+  background: rgba(59,130,246,0.3);
+  color: var(--text-primary);
+}
+</style>
+</head>
+<body>
+
+<!-- Theme Toggle -->
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+
+<div class="container">
+  <!-- Header -->
+  <div class="header-bar">
+    <span class="demo-badge">🎓 ডেমো প্র্যাকটিস</span>
+  </div>
+
+  <!-- ==================== SCREEN 1: WELCOME ==================== -->
+  <div class="screen active" id="screenWelcome">
+    <div class="card">
+      <span class="welcome-icon">📝</span>
+      <h1 class="welcome-title">ডেমো প্র্যাকটিস</h1>
+      <p class="welcome-subtitle">এটি একটি অনুশীলন পরীক্ষা — আসল পরীক্ষায় কীভাবে উত্তর দেবেন তা শিখুন</p>
+
+      <div class="info-pills">
+        <span class="pill"><span class="pill-icon">📋</span> 5 প্রশ্ন</span>
+        <span class="pill"><span class="pill-icon">⏳</span> কোনো সময়সীমা নেই</span>
+        <span class="pill"><span class="pill-icon">🎯</span> অনুশীলন</span>
+      </div>
+
+      <div class="input-group">
+        <label for="studentName">তোমার নাম লেখো</label>
+        <input type="text" id="studentName" placeholder="এখানে নাম লেখো..." autocomplete="name" spellcheck="false">
+      </div>
+
+      <button class="btn-primary" id="btnStart" disabled>শুরু করুন →</button>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 2: QUESTIONS ==================== -->
+  <div class="screen" id="screenQuestions">
+    <div class="questions-header">
+      <h2>প্রশ্নপত্র</h2>
+      <p>প্রতিটি প্রশ্নের একটি সঠিক উত্তর বেছে নাও</p>
+    </div>
+
+    <div id="questionsContainer"></div>
+
+    <div class="submit-section">
+      <div class="unanswered-warning" id="warningMsg">⚠️ সব প্রশ্নের উত্তর দাও!</div>
+      <button class="btn-primary" id="btnSubmit">জমা দিন ✓</button>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN 3: RESULT ==================== -->
+  <div class="screen" id="screenResult">
+    <div class="result-hero">
+      <span class="result-emoji" id="resultEmoji">🎉</span>
+      <div class="result-title" id="resultTitle">অনুশীলন সম্পন্ন!</div>
+      <div class="result-name" id="resultName"></div>
+      <div class="score-circle">
+        <span class="score-num" id="scoreNum">0</span>
+        <span class="score-of">/ 5</span>
+      </div>
+      <div class="score-stats">
+        <span class="stat-item stat-correct"><span class="stat-icon">✅</span> সঠিক: <span id="correctCount">0</span></span>
+        <span class="stat-item stat-wrong"><span class="stat-icon">❌</span> ভুল: <span id="wrongCount">0</span></span>
+      </div>
+    </div>
+
+    <div class="review-section">
+      <h3>📖 উত্তর বিশ্লেষণ</h3>
+      <div id="reviewContainer"></div>
+    </div>
+
+    <div class="cta-section">
+      <a href="physics_mock_test_1.html" class="btn-cta">📝 এবার আসল পরীক্ষা দিন →</a>
+      <p class="cta-hint">আসল পরীক্ষায় যেতে উপরের বোতামে ক্লিক করুন</p>
+    </div>
+  </div>
+
+  <div class="footer">ডেমো প্র্যাকটিস — অনুশীলনের জন্য</div>
+</div>
+
+<script>
+// ===== QUESTIONS DATA =====
+const questions = [
+  {
+    q: "পৃথিবীর সবচেয়ে বড় মহাদেশ কোনটি?",
+    options: ["আফ্রিকা", "এশিয়া", "ইউরোপ", "উত্তর আমেরিকা"],
+    answer: 1
+  },
+  {
+    q: "ভারতের জাতীয় ফুল কী?",
+    options: ["গোলাপ", "গাঁদা", "পদ্ম", "জবা"],
+    answer: 2
+  },
+  {
+    q: "পৃথিবীর সবচেয়ে দীর্ঘ নদী কোনটি?",
+    options: ["গঙ্গা", "নীলনদ", "আমাজন", "মিসিসিপি"],
+    answer: 1
+  },
+  {
+    q: "ভারতের প্রথম প্রধানমন্ত্রী কে ছিলেন?",
+    options: ["মহাত্মা গান্ধী", "সুভাষচন্দ্র বসু", "জওহরলাল নেহরু", "সর্দার প্যাটেল"],
+    answer: 2
+  },
+  {
+    q: "সূর্য কোন দিকে ওঠে?",
+    options: ["পশ্চিমে", "উত্তরে", "দক্ষিণে", "পূর্বে"],
+    answer: 3
+  }
+];
+
+const optionLetters = ["ক", "খ", "গ", "ঘ"];
+
+// ===== DOM REFS =====
+const screenWelcome = document.getElementById('screenWelcome');
+const screenQuestions = document.getElementById('screenQuestions');
+const screenResult = document.getElementById('screenResult');
+const nameInput = document.getElementById('studentName');
+const btnStart = document.getElementById('btnStart');
+const btnSubmit = document.getElementById('btnSubmit');
+const questionsContainer = document.getElementById('questionsContainer');
+const warningMsg = document.getElementById('warningMsg');
+const themeToggle = document.getElementById('themeToggle');
+
+let studentName = '';
+
+// ===== THEME =====
+function initTheme() {
+  const saved = localStorage.getItem('exam_theme');
+  if (saved === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    themeToggle.textContent = '☀️';
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    themeToggle.textContent = '🌙';
+  }
+}
+
+themeToggle.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  if (current === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    localStorage.setItem('exam_theme', 'light');
+    themeToggle.textContent = '☀️';
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('exam_theme', 'dark');
+    themeToggle.textContent = '🌙';
+  }
+});
+
+initTheme();
+
+// ===== NAME INPUT =====
+nameInput.addEventListener('input', () => {
+  const val = nameInput.value.trim();
+  btnStart.disabled = val.length < 1;
+});
+
+nameInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !btnStart.disabled) {
+    btnStart.click();
+  }
+});
+
+// ===== START =====
+btnStart.addEventListener('click', () => {
+  studentName = nameInput.value.trim();
+  if (!studentName) return;
+  showScreen('questions');
+  renderQuestions();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ===== SCREEN MANAGEMENT =====
+function showScreen(name) {
+  screenWelcome.classList.remove('active');
+  screenQuestions.classList.remove('active');
+  screenResult.classList.remove('active');
+
+  if (name === 'welcome') screenWelcome.classList.add('active');
+  if (name === 'questions') screenQuestions.classList.add('active');
+  if (name === 'result') screenResult.classList.add('active');
+}
+
+// ===== RENDER QUESTIONS =====
+function renderQuestions() {
+  questionsContainer.innerHTML = '';
+  questions.forEach((q, qi) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.style.animationDelay = (qi * 0.07) + 's';
+
+    let optionsHTML = '';
+    q.options.forEach((opt, oi) => {
+      optionsHTML += `
+        <label class="option-label" data-q="${qi}" data-o="${oi}">
+          <input type="radio" name="q${qi}" value="${oi}">
+          <span class="option-radio"></span>
+          <span class="option-letter">${optionLetters[oi]})</span>
+          <span>${opt}</span>
+        </label>
+      `;
+    });
+
+    card.innerHTML = `
+      <span class="q-number">প্রশ্ন ${qi + 1}</span>
+      <div class="q-text">${q.q}</div>
+      <div class="options-grid">${optionsHTML}</div>
+    `;
+
+    questionsContainer.appendChild(card);
+  });
+
+  // Option click handlers
+  document.querySelectorAll('.option-label').forEach(label => {
+    label.addEventListener('click', () => {
+      const qi = label.dataset.q;
+      document.querySelectorAll(`.option-label[data-q="${qi}"]`).forEach(l => l.classList.remove('selected'));
+      label.classList.add('selected');
+      label.querySelector('input').checked = true;
+      warningMsg.style.display = 'none';
+    });
+  });
+}
+
+// ===== SUBMIT =====
+btnSubmit.addEventListener('click', () => {
+  const answers = [];
+  let allAnswered = true;
+
+  questions.forEach((q, qi) => {
+    const selected = document.querySelector(`input[name="q${qi}"]:checked`);
+    if (selected) {
+      answers.push(parseInt(selected.value));
+    } else {
+      answers.push(-1);
+      allAnswered = false;
+    }
+  });
+
+  if (!allAnswered) {
+    warningMsg.style.display = 'block';
+    return;
+  }
+
+  calculateResult(answers);
+});
+
+// ===== CALCULATE RESULT =====
+function calculateResult(answers) {
+  let correct = 0;
+  let wrong = 0;
+
+  questions.forEach((q, qi) => {
+    if (answers[qi] === q.answer) {
+      correct++;
+    } else {
+      wrong++;
+    }
+  });
+
+  // Set result screen data
+  document.getElementById('scoreNum').textContent = correct;
+  document.getElementById('correctCount').textContent = correct;
+  document.getElementById('wrongCount').textContent = wrong;
+  document.getElementById('resultName').textContent = studentName;
+
+  // Emoji based on score
+  const resultEmoji = document.getElementById('resultEmoji');
+  const resultTitle = document.getElementById('resultTitle');
+  if (correct === 5) {
+    resultEmoji.textContent = '🏆';
+    resultTitle.textContent = 'অসাধারণ! সব সঠিক!';
+  } else if (correct >= 3) {
+    resultEmoji.textContent = '🎉';
+    resultTitle.textContent = 'ভালো করেছো!';
+  } else {
+    resultEmoji.textContent = '💪';
+    resultTitle.textContent = 'আরও অনুশীলন করো!';
+  }
+
+  // Review cards
+  const reviewContainer = document.getElementById('reviewContainer');
+  reviewContainer.innerHTML = '';
+
+  questions.forEach((q, qi) => {
+    const isCorrect = answers[qi] === q.answer;
+    const studentAns = answers[qi] >= 0 ? `${optionLetters[answers[qi]]}) ${q.options[answers[qi]]}` : 'উত্তর দেওয়া হয়নি';
+    const correctAns = `${optionLetters[q.answer]}) ${q.options[q.answer]}`;
+
+    const div = document.createElement('div');
+    div.className = `review-card ${isCorrect ? 'correct' : 'wrong'}`;
+    div.style.animationDelay = (qi * 0.07) + 's';
+
+    div.innerHTML = `
+      <div class="review-q-num">${isCorrect ? '✅' : '❌'} প্রশ্ন ${qi + 1}</div>
+      <div class="review-q-text">${q.q}</div>
+      <div class="review-answers">
+        <div class="review-answer">
+          <span class="ra-label">তোমার উত্তর:</span>
+          <span class="ra-value ${isCorrect ? 'ra-correct' : 'ra-wrong'}">${studentAns}</span>
+        </div>
+        ${!isCorrect ? `
+        <div class="review-answer">
+          <span class="ra-label">সঠিক উত্তর:</span>
+          <span class="ra-value ra-correct">${correctAns}</span>
+        </div>` : ''}
+      </div>
+    `;
+
+    reviewContainer.appendChild(div);
+  });
+
+  showScreen('result');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
